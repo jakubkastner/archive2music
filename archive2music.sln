@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "archive2music", "archive2music\archive2music.csproj", "{98030BD4-3303-4656-8A4A-F65935C5121D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98030BD4-3303-4656-8A4A-F65935C5121D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98030BD4-3303-4656-8A4A-F65935C5121D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98030BD4-3303-4656-8A4A-F65935C5121D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98030BD4-3303-4656-8A4A-F65935C5121D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D896F8E5-2699-482D-811C-648D16D8C3FC}
+	EndGlobalSection
+EndGlobal
