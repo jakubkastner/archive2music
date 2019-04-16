@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.buttonZobrazeniArchivu_Rozbalit = new System.Windows.Forms.Button();
             this.buttonNastaveni_SlozkaOpusVybrat = new System.Windows.Forms.Button();
             this.buttonPridaniUpravaArchivu_ArchivVybrat = new System.Windows.Forms.Button();
@@ -97,8 +98,8 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.labelPridaniUpravaArchivu_CoverInfo = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.textBoxPridaniUpravaArchivu_Archiv = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.panelNastaveni = new System.Windows.Forms.Panel();
             this.textBoxNastaveni_RozbaleniParametry = new System.Windows.Forms.TextBox();
             this.textBoxNastaveni_AlbumArtParametry = new System.Windows.Forms.TextBox();
@@ -1142,20 +1143,6 @@
             this.labelPridaniUpravaArchivu_CoverInfo.TabIndex = 34;
             this.labelPridaniUpravaArchivu_CoverInfo.Text = "obrázek info";
             // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
-            this.label16.Font = new System.Drawing.Font("Calibri", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label16.Location = new System.Drawing.Point(0, 10);
-            this.label16.Name = "label16";
-            this.label16.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.label16.Size = new System.Drawing.Size(1085, 25);
-            this.label16.TabIndex = 41;
-            this.label16.Text = "ARCHIV A SLOŽKY";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // textBoxPridaniUpravaArchivu_Archiv
             // 
             this.textBoxPridaniUpravaArchivu_Archiv.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1169,6 +1156,20 @@
             this.textBoxPridaniUpravaArchivu_Archiv.Size = new System.Drawing.Size(546, 22);
             this.textBoxPridaniUpravaArchivu_Archiv.TabIndex = 11;
             this.textBoxPridaniUpravaArchivu_Archiv.Leave += new System.EventHandler(this.textBoxPridaniUpravaArchivu_Zanr_Leave);
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.label16.Font = new System.Drawing.Font("Calibri", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label16.Location = new System.Drawing.Point(0, 10);
+            this.label16.Name = "label16";
+            this.label16.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.label16.Size = new System.Drawing.Size(1085, 25);
+            this.label16.TabIndex = 41;
+            this.label16.Text = "ARCHIV A SLOŽKY";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panelNastaveni
             // 
@@ -2115,17 +2116,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1084, 772);
             this.Controls.Add(this.listViewStav);
             this.Controls.Add(this.panelMenu);
-            this.Controls.Add(this.panelPridaniSlozky);
-            this.Controls.Add(this.panelPridaniUpravaArchivu);
             this.Controls.Add(this.panelZobrazeniArchivu);
             this.Controls.Add(this.panelNastaveni);
+            this.Controls.Add(this.panelPridaniSlozky);
+            this.Controls.Add(this.panelPridaniUpravaArchivu);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.ShowIcon = false;
             this.Text = "Archive2Music 0.8 Beta";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
