@@ -37,7 +37,6 @@
             this.textBoxPridaniUpravaArchivu_Album = new System.Windows.Forms.TextBox();
             this.textBoxPridaniUpravaArchivu_Zanr = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBoxPridaniUpravaArchivu_SlozkaStat = new System.Windows.Forms.ComboBox();
             this.comboBoxPridaniUpravaArchivu_SlozkaZanr = new System.Windows.Forms.ComboBox();
             this.buttonZobrazeniArchivu_Mp3TagMp3 = new System.Windows.Forms.Button();
             this.buttonNastaveni_Mp3TagVybrat = new System.Windows.Forms.Button();
@@ -91,6 +90,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.buttonPridaniUpravaArchivu_Nasledujici = new System.Windows.Forms.Button();
             this.buttonPridaniUpravaArchivu_PridatPredchozi = new System.Windows.Forms.Button();
+            this.buttonPridaniUpravaArchivu_Deezer = new System.Windows.Forms.Button();
             this.checkBoxPridaniUpravaArchivu_ArchivHesloZobrazit = new System.Windows.Forms.CheckBox();
             this.checkBoxPridaniUpravaArchivu_UkladatAutomaticky = new System.Windows.Forms.CheckBox();
             this.textBoxPridaniUpravaArchivu_ArchivHeslo = new System.Windows.Forms.TextBox();
@@ -111,13 +111,17 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.labelNastaveni_DeezerStav = new System.Windows.Forms.Label();
             this.labelNastaveni_RozbaleniStav = new System.Windows.Forms.Label();
             this.labelNastaveni_Mp3EnkoderStav = new System.Windows.Forms.Label();
+            this.buttonNastaveni_DeezerVybrat = new System.Windows.Forms.Button();
             this.buttonNastaveni_RozbaleniVybrat = new System.Windows.Forms.Button();
             this.buttonNastaveni_Mp3EnkoderVybrat = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.comboBoxNastaveni_Deezer = new System.Windows.Forms.ComboBox();
             this.comboBoxNastaveni_Rozbaleni = new System.Windows.Forms.ComboBox();
             this.comboBoxNastaveni_Mp3Enkoder = new System.Windows.Forms.ComboBox();
             this.listViewStav = new System.Windows.Forms.ListView();
@@ -274,23 +278,6 @@
             this.label3.Text = "Opus";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // comboBoxPridaniUpravaArchivu_SlozkaStat
-            // 
-            this.comboBoxPridaniUpravaArchivu_SlozkaStat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
-            this.comboBoxPridaniUpravaArchivu_SlozkaStat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxPridaniUpravaArchivu_SlozkaStat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxPridaniUpravaArchivu_SlozkaStat.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.comboBoxPridaniUpravaArchivu_SlozkaStat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(240)))), ((int)(((byte)(220)))));
-            this.comboBoxPridaniUpravaArchivu_SlozkaStat.FormattingEnabled = true;
-            this.comboBoxPridaniUpravaArchivu_SlozkaStat.Items.AddRange(new object[] {
-            "CZ & SK",
-            "Ostatní země"});
-            this.comboBoxPridaniUpravaArchivu_SlozkaStat.Location = new System.Drawing.Point(251, 97);
-            this.comboBoxPridaniUpravaArchivu_SlozkaStat.Name = "comboBoxPridaniUpravaArchivu_SlozkaStat";
-            this.comboBoxPridaniUpravaArchivu_SlozkaStat.Size = new System.Drawing.Size(111, 22);
-            this.comboBoxPridaniUpravaArchivu_SlozkaStat.TabIndex = 7;
-            this.comboBoxPridaniUpravaArchivu_SlozkaStat.SelectedIndexChanged += new System.EventHandler(this.comboBoxPridaniUpravaArchivu_SlozkaStat_SelectedIndexChanged);
-            // 
             // comboBoxPridaniUpravaArchivu_SlozkaZanr
             // 
             this.comboBoxPridaniUpravaArchivu_SlozkaZanr.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
@@ -300,11 +287,13 @@
             this.comboBoxPridaniUpravaArchivu_SlozkaZanr.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(240)))), ((int)(((byte)(220)))));
             this.comboBoxPridaniUpravaArchivu_SlozkaZanr.FormattingEnabled = true;
             this.comboBoxPridaniUpravaArchivu_SlozkaZanr.Items.AddRange(new object[] {
-            "Rap & Hip-Hop",
-            "Ostatní žánry"});
+            "Rap",
+            "Hip-Hop",
+            "Ostatní CZ",
+            "Ostatní"});
             this.comboBoxPridaniUpravaArchivu_SlozkaZanr.Location = new System.Drawing.Point(136, 97);
             this.comboBoxPridaniUpravaArchivu_SlozkaZanr.Name = "comboBoxPridaniUpravaArchivu_SlozkaZanr";
-            this.comboBoxPridaniUpravaArchivu_SlozkaZanr.Size = new System.Drawing.Size(111, 22);
+            this.comboBoxPridaniUpravaArchivu_SlozkaZanr.Size = new System.Drawing.Size(226, 22);
             this.comboBoxPridaniUpravaArchivu_SlozkaZanr.TabIndex = 6;
             this.comboBoxPridaniUpravaArchivu_SlozkaZanr.SelectedIndexChanged += new System.EventHandler(this.comboBoxPridaniUpravaArchivu_SlozkaZanr_SelectedIndexChanged);
             // 
@@ -946,9 +935,9 @@
             this.panelPridaniUpravaArchivu.Controls.Add(this.labelPridaniUpravaArchivu_ArchivStav);
             this.panelPridaniUpravaArchivu.Controls.Add(this.buttonPridaniUpravaArchivu_Nasledujici);
             this.panelPridaniUpravaArchivu.Controls.Add(this.buttonPridaniUpravaArchivu_PridatPredchozi);
+            this.panelPridaniUpravaArchivu.Controls.Add(this.buttonPridaniUpravaArchivu_Deezer);
             this.panelPridaniUpravaArchivu.Controls.Add(this.buttonPridaniUpravaArchivu_CoverSmazat);
             this.panelPridaniUpravaArchivu.Controls.Add(this.buttonPridaniUpravaArchivu_ArchivVybrat);
-            this.panelPridaniUpravaArchivu.Controls.Add(this.comboBoxPridaniUpravaArchivu_SlozkaStat);
             this.panelPridaniUpravaArchivu.Controls.Add(this.label3);
             this.panelPridaniUpravaArchivu.Controls.Add(this.label2);
             this.panelPridaniUpravaArchivu.Controls.Add(this.checkBoxPridaniUpravaArchivu_PrepsatSoubory);
@@ -1069,6 +1058,22 @@
             this.buttonPridaniUpravaArchivu_PridatPredchozi.Text = "Přidat / předchozí";
             this.buttonPridaniUpravaArchivu_PridatPredchozi.UseVisualStyleBackColor = false;
             this.buttonPridaniUpravaArchivu_PridatPredchozi.Click += new System.EventHandler(this.buttonPridaniUpravaArchivu_PridatPredchozi_Click);
+            // 
+            // buttonPridaniUpravaArchivu_Deezer
+            // 
+            this.buttonPridaniUpravaArchivu_Deezer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))));
+            this.buttonPridaniUpravaArchivu_Deezer.FlatAppearance.BorderSize = 0;
+            this.buttonPridaniUpravaArchivu_Deezer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.buttonPridaniUpravaArchivu_Deezer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            this.buttonPridaniUpravaArchivu_Deezer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPridaniUpravaArchivu_Deezer.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonPridaniUpravaArchivu_Deezer.Location = new System.Drawing.Point(7, 473);
+            this.buttonPridaniUpravaArchivu_Deezer.Name = "buttonPridaniUpravaArchivu_Deezer";
+            this.buttonPridaniUpravaArchivu_Deezer.Size = new System.Drawing.Size(125, 22);
+            this.buttonPridaniUpravaArchivu_Deezer.TabIndex = 52;
+            this.buttonPridaniUpravaArchivu_Deezer.Text = "Deezer search";
+            this.buttonPridaniUpravaArchivu_Deezer.UseVisualStyleBackColor = false;
+            this.buttonPridaniUpravaArchivu_Deezer.Click += new System.EventHandler(this.buttonPridaniUpravaArchivu_Deezer_Click);
             // 
             // checkBoxPridaniUpravaArchivu_ArchivHesloZobrazit
             // 
@@ -1195,14 +1200,17 @@
             this.panelNastaveni.Controls.Add(this.label24);
             this.panelNastaveni.Controls.Add(this.label22);
             this.panelNastaveni.Controls.Add(this.label19);
+            this.panelNastaveni.Controls.Add(this.label30);
             this.panelNastaveni.Controls.Add(this.label23);
             this.panelNastaveni.Controls.Add(this.label21);
             this.panelNastaveni.Controls.Add(this.label13);
+            this.panelNastaveni.Controls.Add(this.labelNastaveni_DeezerStav);
             this.panelNastaveni.Controls.Add(this.labelNastaveni_RozbaleniStav);
             this.panelNastaveni.Controls.Add(this.labelNastaveni_Mp3EnkoderStav);
             this.panelNastaveni.Controls.Add(this.labelNastaveni_OpusEnkoderStav);
             this.panelNastaveni.Controls.Add(this.buttonNastaveni_Mp3TagVybrat);
             this.panelNastaveni.Controls.Add(this.buttonNastaveni_AlbumArtVybrat);
+            this.panelNastaveni.Controls.Add(this.buttonNastaveni_DeezerVybrat);
             this.panelNastaveni.Controls.Add(this.buttonNastaveni_RozbaleniVybrat);
             this.panelNastaveni.Controls.Add(this.buttonNastaveni_Mp3EnkoderVybrat);
             this.panelNastaveni.Controls.Add(this.buttonNastaveni_OpusEnkoderVybrat);
@@ -1211,6 +1219,7 @@
             this.panelNastaveni.Controls.Add(this.label4);
             this.panelNastaveni.Controls.Add(this.labelNastaveni_AlbumArtStav);
             this.panelNastaveni.Controls.Add(this.comboBoxNastaveni_Mp3Tag);
+            this.panelNastaveni.Controls.Add(this.comboBoxNastaveni_Deezer);
             this.panelNastaveni.Controls.Add(this.comboBoxNastaveni_AlbumArt);
             this.panelNastaveni.Controls.Add(this.comboBoxNastaveni_Rozbaleni);
             this.panelNastaveni.Controls.Add(this.comboBoxNastaveni_Mp3Enkoder);
@@ -1253,7 +1262,7 @@
             this.checkBoxNastaveni_ZobrazovatPodrobnostiStavu.Checked = true;
             this.checkBoxNastaveni_ZobrazovatPodrobnostiStavu.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxNastaveni_ZobrazovatPodrobnostiStavu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.checkBoxNastaveni_ZobrazovatPodrobnostiStavu.Location = new System.Drawing.Point(135, 388);
+            this.checkBoxNastaveni_ZobrazovatPodrobnostiStavu.Location = new System.Drawing.Point(136, 416);
             this.checkBoxNastaveni_ZobrazovatPodrobnostiStavu.Name = "checkBoxNastaveni_ZobrazovatPodrobnostiStavu";
             this.checkBoxNastaveni_ZobrazovatPodrobnostiStavu.Size = new System.Drawing.Size(220, 22);
             this.checkBoxNastaveni_ZobrazovatPodrobnostiStavu.TabIndex = 44;
@@ -1344,6 +1353,17 @@
             this.label19.Text = "Parametry opus";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // label30
+            // 
+            this.label30.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
+            this.label30.Location = new System.Drawing.Point(0, 382);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(130, 22);
+            this.label30.TabIndex = 39;
+            this.label30.Text = "Deezer search";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // label23
             // 
             this.label23.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -1365,6 +1385,18 @@
             this.label21.TabIndex = 39;
             this.label21.Text = "Mp3 Enkoder";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelNastaveni_DeezerStav
+            // 
+            this.labelNastaveni_DeezerStav.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelNastaveni_DeezerStav.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelNastaveni_DeezerStav.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
+            this.labelNastaveni_DeezerStav.Location = new System.Drawing.Point(804, 382);
+            this.labelNastaveni_DeezerStav.Name = "labelNastaveni_DeezerStav";
+            this.labelNastaveni_DeezerStav.Size = new System.Drawing.Size(278, 22);
+            this.labelNastaveni_DeezerStav.TabIndex = 30;
+            this.labelNastaveni_DeezerStav.Text = "stav";
+            this.labelNastaveni_DeezerStav.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelNastaveni_RozbaleniStav
             // 
@@ -1389,6 +1421,23 @@
             this.labelNastaveni_Mp3EnkoderStav.TabIndex = 30;
             this.labelNastaveni_Mp3EnkoderStav.Text = "stav";
             this.labelNastaveni_Mp3EnkoderStav.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // buttonNastaveni_DeezerVybrat
+            // 
+            this.buttonNastaveni_DeezerVybrat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonNastaveni_DeezerVybrat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))));
+            this.buttonNastaveni_DeezerVybrat.FlatAppearance.BorderSize = 0;
+            this.buttonNastaveni_DeezerVybrat.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.buttonNastaveni_DeezerVybrat.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            this.buttonNastaveni_DeezerVybrat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNastaveni_DeezerVybrat.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonNastaveni_DeezerVybrat.Location = new System.Drawing.Point(687, 382);
+            this.buttonNastaveni_DeezerVybrat.Name = "buttonNastaveni_DeezerVybrat";
+            this.buttonNastaveni_DeezerVybrat.Size = new System.Drawing.Size(110, 22);
+            this.buttonNastaveni_DeezerVybrat.TabIndex = 5;
+            this.buttonNastaveni_DeezerVybrat.Text = "Vybrat soubor...";
+            this.buttonNastaveni_DeezerVybrat.UseVisualStyleBackColor = false;
+            this.buttonNastaveni_DeezerVybrat.Click += new System.EventHandler(this.buttonNastaveni_DeezerVybrat_Click);
             // 
             // buttonNastaveni_RozbaleniVybrat
             // 
@@ -1438,6 +1487,25 @@
             this.label4.Text = "HUDEBNÍ SLOŽKY";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // comboBoxNastaveni_Deezer
+            // 
+            this.comboBoxNastaveni_Deezer.AllowDrop = true;
+            this.comboBoxNastaveni_Deezer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxNastaveni_Deezer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.comboBoxNastaveni_Deezer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxNastaveni_Deezer.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBoxNastaveni_Deezer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(240)))), ((int)(((byte)(220)))));
+            this.comboBoxNastaveni_Deezer.FormattingEnabled = true;
+            this.comboBoxNastaveni_Deezer.Location = new System.Drawing.Point(136, 382);
+            this.comboBoxNastaveni_Deezer.Name = "comboBoxNastaveni_Deezer";
+            this.comboBoxNastaveni_Deezer.Size = new System.Drawing.Size(545, 22);
+            this.comboBoxNastaveni_Deezer.TabIndex = 4;
+            this.comboBoxNastaveni_Deezer.DragDrop += new System.Windows.Forms.DragEventHandler(this.comboBoxSoubor_DragDrop);
+            this.comboBoxNastaveni_Deezer.DragEnter += new System.Windows.Forms.DragEventHandler(this.prvek_DragEnter);
+            this.comboBoxNastaveni_Deezer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox_KeyDown);
+            this.comboBoxNastaveni_Deezer.Leave += new System.EventHandler(this.comboBoxNastaveni_Deezer_Leave);
+            // 
             // comboBoxNastaveni_Rozbaleni
             // 
             this.comboBoxNastaveni_Rozbaleni.AllowDrop = true;
@@ -1486,6 +1554,7 @@
             this.columnHeader1});
             this.listViewStav.ForeColor = System.Drawing.Color.White;
             this.listViewStav.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewStav.HideSelection = false;
             this.listViewStav.Location = new System.Drawing.Point(12, 658);
             this.listViewStav.MultiSelect = false;
             this.listViewStav.Name = "listViewStav";
@@ -1699,6 +1768,7 @@
             this.columnHeaderPridaniSlozky_SeznamArchivu_Cesta});
             this.listViewPridaniSlozky_SeznamArchivu.ForeColor = System.Drawing.Color.White;
             this.listViewPridaniSlozky_SeznamArchivu.FullRowSelect = true;
+            this.listViewPridaniSlozky_SeznamArchivu.HideSelection = false;
             this.listViewPridaniSlozky_SeznamArchivu.Location = new System.Drawing.Point(4, 128);
             this.listViewPridaniSlozky_SeznamArchivu.MultiSelect = false;
             this.listViewPridaniSlozky_SeznamArchivu.Name = "listViewPridaniSlozky_SeznamArchivu";
@@ -1945,6 +2015,7 @@
             this.listViewZobrazeniArchivu_SeznamArchivu.ForeColor = System.Drawing.Color.White;
             this.listViewZobrazeniArchivu_SeznamArchivu.FullRowSelect = true;
             this.listViewZobrazeniArchivu_SeznamArchivu.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listViewZobrazeniArchivu_SeznamArchivu.HideSelection = false;
             this.listViewZobrazeniArchivu_SeznamArchivu.Location = new System.Drawing.Point(3, 38);
             this.listViewZobrazeniArchivu_SeznamArchivu.MultiSelect = false;
             this.listViewZobrazeniArchivu_SeznamArchivu.Name = "listViewZobrazeniArchivu_SeznamArchivu";
@@ -2120,10 +2191,10 @@
             this.ClientSize = new System.Drawing.Size(1084, 772);
             this.Controls.Add(this.listViewStav);
             this.Controls.Add(this.panelMenu);
+            this.Controls.Add(this.panelPridaniUpravaArchivu);
             this.Controls.Add(this.panelZobrazeniArchivu);
             this.Controls.Add(this.panelNastaveni);
             this.Controls.Add(this.panelPridaniSlozky);
-            this.Controls.Add(this.panelPridaniUpravaArchivu);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -2154,7 +2225,6 @@
         private System.Windows.Forms.TextBox textBoxPridaniUpravaArchivu_Album;
         private System.Windows.Forms.TextBox textBoxPridaniUpravaArchivu_Zanr;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBoxPridaniUpravaArchivu_SlozkaStat;
         private System.Windows.Forms.ComboBox comboBoxPridaniUpravaArchivu_SlozkaZanr;
         private System.Windows.Forms.Button buttonZobrazeniArchivu_Mp3TagMp3;
         private System.Windows.Forms.Button buttonNastaveni_Mp3TagVybrat;
@@ -2288,6 +2358,11 @@
         private System.Windows.Forms.CheckBox checkBoxPridaniSlozky_NacistPodslozky;
         private System.Windows.Forms.CheckBox checkBoxNastaveni_ZobrazovatPodrobnostiStavu;
         private System.Windows.Forms.CheckBox checkBoxPridaniSlozky_odstranitNacteneArchivy;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label labelNastaveni_DeezerStav;
+        private System.Windows.Forms.Button buttonNastaveni_DeezerVybrat;
+        private System.Windows.Forms.ComboBox comboBoxNastaveni_Deezer;
+        private System.Windows.Forms.Button buttonPridaniUpravaArchivu_Deezer;
     }
 }
 

@@ -225,7 +225,7 @@ namespace alba
             {
                 // složka existuje
                 // -> zkontoluji zda-li existují v dané složce podsložky žánru
-                ZkontrolujSlozku(Path.Combine(comboBoxNastaveni_SlozkaOpus.Text, comboBoxPridaniUpravaArchivu_SlozkaZanr.Text, comboBoxPridaniUpravaArchivu_SlozkaStat.Text), true, labelNastaveni_SlozkaOpusStav);
+                ZkontrolujSlozku(Path.Combine(comboBoxNastaveni_SlozkaOpus.Text, comboBoxPridaniUpravaArchivu_SlozkaZanr.Text), true, labelNastaveni_SlozkaOpusStav);
             }
 
             if (!String.IsNullOrEmpty(labelNastaveni_SlozkaOpusStav.Text))
@@ -256,7 +256,7 @@ namespace alba
             // (rok je vyplněn vždy)
 
             // získám složku interpreta a alba do které má bý archiv přesunut
-            string slozka = Path.Combine(comboBoxNastaveni_SlozkaOpus.Text, comboBoxPridaniUpravaArchivu_SlozkaZanr.Text, comboBoxPridaniUpravaArchivu_SlozkaStat.Text,
+            string slozka = Path.Combine(comboBoxNastaveni_SlozkaOpus.Text, comboBoxPridaniUpravaArchivu_SlozkaZanr.Text,
                                             textBoxPridaniUpravaArchivu_Interpret.Text, numericUpDownPridaniUpravaArchivu_Rok.Value + " " + textBoxPridaniUpravaArchivu_Album.Text);
             labelPridaniUpravaArchivu_SlozkaOpusCesta.Text = slozka;
 
@@ -292,7 +292,7 @@ namespace alba
             {
                 // složka existuje
                 // -> zkontoluji zda-li existují v dané složce podsložky žánru
-                ZkontrolujSlozku(Path.Combine(comboBoxNastaveni_SlozkaMp3.Text, comboBoxPridaniUpravaArchivu_SlozkaZanr.Text, comboBoxPridaniUpravaArchivu_SlozkaStat.Text), true, labelNastaveni_SlozkaMp3Stav);
+                ZkontrolujSlozku(Path.Combine(comboBoxNastaveni_SlozkaMp3.Text, comboBoxPridaniUpravaArchivu_SlozkaZanr.Text), true, labelNastaveni_SlozkaMp3Stav);
             }
 
             if (!String.IsNullOrEmpty(labelNastaveni_SlozkaMp3Stav.Text))
@@ -323,7 +323,7 @@ namespace alba
             // (rok je vyplněn vždy)
 
             // získám složku interpreta a alba do které má bý archiv přesunut
-            string slozka = Path.Combine(comboBoxNastaveni_SlozkaMp3.Text, comboBoxPridaniUpravaArchivu_SlozkaZanr.Text, comboBoxPridaniUpravaArchivu_SlozkaStat.Text,
+            string slozka = Path.Combine(comboBoxNastaveni_SlozkaMp3.Text, comboBoxPridaniUpravaArchivu_SlozkaZanr.Text, 
                                             textBoxPridaniUpravaArchivu_Interpret.Text, numericUpDownPridaniUpravaArchivu_Rok.Value + " " + textBoxPridaniUpravaArchivu_Album.Text);
             labelPridaniUpravaArchivu_SlozkaMp3Cesta.Text = slozka;
 
@@ -495,11 +495,11 @@ namespace alba
             labelNastaveni_AlbumArtStav.Text = "Soubor neexistuje!";
             labelNastaveni_OpusEnkoderStav.Text = "Soubor neexistuje!";
             labelNastaveni_Mp3EnkoderStav.Text = "Soubor neexistuje!";
-            
+            labelNastaveni_DeezerStav.Text = "Soubor neexistuje!";
+
             // -> rozbalení
             labelPridaniUpravaArchivu_ArchivStav.Text = "Soubor neexistuje!";
             comboBoxPridaniUpravaArchivu_SlozkaZanr.SelectedIndex = 0;
-            comboBoxPridaniUpravaArchivu_SlozkaStat.SelectedIndex = 0;
             numericUpDownPridaniUpravaArchivu_Rok.Maximum = DateTime.Now.Year;
             if (DateTime.Now.Year >= numericUpDownPridaniUpravaArchivu_Rok.Minimum && DateTime.Now.Year <= numericUpDownPridaniUpravaArchivu_Rok.Maximum)
             {
@@ -561,6 +561,9 @@ namespace alba
             NactiSoubor(Path.Combine(slozkaProgramuData, "n_mp3enkoder.txt"), comboBoxNastaveni_Mp3Enkoder);
             ZkontrolujSoubor(comboBoxNastaveni_Mp3Enkoder.Text, ".exe", labelNastaveni_Mp3EnkoderStav);
 
+            NactiSoubor(Path.Combine(slozkaProgramuData, "n_deezer.txt"), comboBoxNastaveni_Deezer);
+            ZkontrolujSoubor(comboBoxNastaveni_Deezer.Text, ".exe", labelNastaveni_DeezerStav);
+
             // -> rozbalení
             NactiSoubor(Path.Combine(slozkaProgramuData, "h_archiv.txt"), comboBoxPridaniUpravaArchivu_Archiv);
             ZkontrolujSoubor(comboBoxPridaniUpravaArchivu_Archiv.Text, new string[] { ".zip", ".rar", ".tar", ".7z" }, labelPridaniUpravaArchivu_ArchivStav);
@@ -608,6 +611,7 @@ namespace alba
             UlozSoubor(Path.Combine(slozkaProgramuData, "n_albumart.txt"), comboBoxNastaveni_AlbumArt);
             UlozSoubor(Path.Combine(slozkaProgramuData, "n_opusenkoder.txt"), comboBoxNastaveni_OpusEnkoder);
             UlozSoubor(Path.Combine(slozkaProgramuData, "n_mp3enkoder.txt"), comboBoxNastaveni_Mp3Enkoder);
+            UlozSoubor(Path.Combine(slozkaProgramuData, "n_deezer.txt"), comboBoxNastaveni_Deezer);
 
             // odstranění cache složky
             while (Directory.Exists(slozkaProgramuCache))
@@ -767,6 +771,17 @@ namespace alba
 
         }
 
+        private void comboBoxNastaveni_Deezer_Leave(object sender, EventArgs e)
+        {
+            ZkontrolujSoubor(comboBoxNastaveni_Deezer.Text, ".exe", labelNastaveni_DeezerStav);
+            PridejCestu(comboBoxNastaveni_Deezer.Text, comboBoxNastaveni_Deezer, true);
+        }
+        private void buttonNastaveni_DeezerVybrat_Click(object sender, EventArgs e)
+        {
+            VyberSoubor("Deezer search | *.exe", comboBoxNastaveni_Deezer);
+            ZkontrolujSoubor(comboBoxNastaveni_Deezer.Text, ".exe", labelNastaveni_DeezerStav);
+        }
+
         // PŘIDÁNÍ / ÚPRAVA ARCHIVU //
 
         private void comboBoxPridaniUpravaArchivu_Archiv_Leave(object sender, EventArgs e)
@@ -830,29 +845,7 @@ namespace alba
         private string ZiskejZanr()
         {
             // automaticky získá žánr
-            string zanr = DateTime.Now.Year + "." + DateTime.Now.Month.ToString("d2") + " ";
-            if (comboBoxPridaniUpravaArchivu_SlozkaZanr.Text == "Rap & Hip-Hop")
-            {
-                if (comboBoxPridaniUpravaArchivu_SlozkaStat.Text == "CZ & SK")
-                {
-                    zanr += "Rap";
-                }
-                else
-                {
-                    zanr += "Hip-Hop";
-                }
-            }
-            else
-            {
-                if (comboBoxPridaniUpravaArchivu_SlozkaStat.Text == "CZ & SK")
-                {
-                    zanr += "Ostatní CZ";
-                }
-                else
-                {
-                    zanr += "Ostatní";
-                }
-            }
+            string zanr = DateTime.Now.Year + "." + DateTime.Now.Month.ToString("d2") + " " + comboBoxPridaniUpravaArchivu_SlozkaZanr.Text;
             return zanr;
         }
 
@@ -1010,6 +1003,35 @@ namespace alba
                         MessageBox.Show(ex.Message);
                     }
                 }
+            }
+        }
+
+        private void buttonPridaniUpravaArchivu_Deezer_Click(object sender, EventArgs e)
+        {
+            // cover - získání pomocí Deezer
+            ZobrazStavNovy("získání informací pomocí deezer search", false);
+            ZobrazStavPrubezny("kontroluji cestu " + comboBoxNastaveni_Deezer.Text);
+
+            // zkontroluje cestu spustitelného programu
+            ZkontrolujSoubor(comboBoxNastaveni_Deezer.Text, ".exe", labelNastaveni_DeezerStav);
+            if (ZkontrolujPredSpoustenim(labelNastaveni_DeezerStav.Text, true))
+            {
+                string slozka = Path.GetDirectoryName(comboBoxNastaveni_Deezer.Text);
+                if (Directory.Exists(slozka))
+                {
+                    ZobrazStavPrubezny("měním nastavení programu deezer search");
+                    UlozSoubor(Path.Combine(slozka, "cesta.txt"), slozkaProgramuCache);
+                }
+                else
+                {
+                    ZobrazStavPosledni("nastavení programu deezer search se nezdařilo", true);
+                }
+                SpustitProgram(comboBoxNastaveni_Deezer.Text, "\"" + textBoxPridaniUpravaArchivu_Interpret.Text + "\" \"" + textBoxPridaniUpravaArchivu_Album.Text + "\"", true);
+            }
+            else
+            {
+                // neexistující soubor
+                ZobrazStavPosledni(labelNastaveni_DeezerStav.Text, false);
             }
         }
 
@@ -1863,7 +1885,7 @@ namespace alba
                         string interpret = archiv.SubItems[3].Text;
                         string rok = archiv.SubItems[3].Text;
                         string album = archiv.SubItems[3].Text;
-                        string zanr = archiv.SubItems[6].Text.ToLower();
+                        string zanr = archiv.SubItems[6].Text;
                         if (String.IsNullOrEmpty(interpret) ||
                             String.IsNullOrEmpty(rok) ||
                             String.IsNullOrEmpty(album) ||
@@ -1872,46 +1894,24 @@ namespace alba
                             // není vyplněno
                             continue;
                         }
-                        string slozkaZanr = null;
-                        // získám složku žánru
-                        if (zanr.Contains("hip-hop"))
-                        {
-                            slozkaZanr = Path.Combine("Rap & Hip-Hop", "Ostatní země");
-                        }
-                        else if (zanr.Contains("rap"))
-                        {
-                            slozkaZanr = Path.Combine("Rap & Hip-Hop", "CZ & SK");
-                        }
-                        else if (zanr.Contains("ostatní cz"))
-                        {
-                            slozkaZanr = Path.Combine("Ostatní žánry", "CZ & SK");
-                        }
-                        else if (zanr.Contains("ostatní"))
-                        {
-                            slozkaZanr = Path.Combine("Ostatní žánry", "Ostatní země");
-                        }
-                        else
-                        {
-                            continue;
-                        }
                         // je vyplněno vše potřebné k získání cesty hudebních složek
 
                         // zkontoluji složku opus a mp3
-                        ZkontrolujSlozku(Path.Combine(comboBoxNastaveni_SlozkaOpus.Text, slozkaZanr), true, labelZobrazeniArchivu_Kontrola);
+                        ZkontrolujSlozku(Path.Combine(comboBoxNastaveni_SlozkaOpus.Text, zanr), true, labelZobrazeniArchivu_Kontrola);
                         if (!String.IsNullOrEmpty(labelZobrazeniArchivu_Kontrola.Text))
                         {
                             // složka neexistuje nebo v ní neexistují podsložky žánru
                             continue;
                         }
-                        ZkontrolujSlozku(Path.Combine(comboBoxNastaveni_SlozkaMp3.Text, slozkaZanr), true, labelZobrazeniArchivu_Kontrola);
+                        ZkontrolujSlozku(Path.Combine(comboBoxNastaveni_SlozkaMp3.Text, zanr), true, labelZobrazeniArchivu_Kontrola);
                         if (!String.IsNullOrEmpty(labelZobrazeniArchivu_Kontrola.Text))
                         {
                             // složka neexistuje nebo v ní neexistují podsložky žánru
                             continue;
                         }
                         // získám složku interpreta a alba do které má bý archiv přesunut
-                        archiv.SubItems[7].Text = Path.Combine(comboBoxNastaveni_SlozkaOpus.Text, slozkaZanr, interpret, rok + " " + album);
-                        archiv.SubItems[8].Text = Path.Combine(comboBoxNastaveni_SlozkaMp3.Text, slozkaZanr, interpret, rok + " " + album);
+                        archiv.SubItems[7].Text = Path.Combine(comboBoxNastaveni_SlozkaOpus.Text, zanr, interpret, rok + " " + album);
+                        archiv.SubItems[8].Text = Path.Combine(comboBoxNastaveni_SlozkaMp3.Text, zanr, interpret, rok + " " + album);
                     }
                 }                
             }
