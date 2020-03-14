@@ -2351,7 +2351,27 @@ namespace alba
                     ZobrazStavPosledni("nepodařilo se otevřít soubory v mp3tagu, rozbalte archiv", false);
                     continue;
                 }
-                string cesta = Path.Combine(Directory.GetCurrentDirectory() , slozkaProgramuCache, archivKOtevreni.SubItems[0].Text);
+
+                string cesta;
+                if (archivKOtevreni.SubItems[1].Text == "6")
+                {
+                    if (mp3)
+                    {
+                        cesta = archivKOtevreni.SubItems[8].Text;
+                    }
+                    else if (opus)
+                    {
+                        cesta = archivKOtevreni.SubItems[7].Text;
+                    }
+                    else
+                    {
+                        cesta = Path.Combine(Directory.GetCurrentDirectory(), slozkaProgramuCache, archivKOtevreni.SubItems[0].Text);
+                    }
+                }
+                else
+                {
+                    cesta = Path.Combine(Directory.GetCurrentDirectory(), slozkaProgramuCache, archivKOtevreni.SubItems[0].Text);
+                }
 
                 if (opus)
                 {
@@ -2362,7 +2382,10 @@ namespace alba
                         continue;
                     }
 
-                    cesta = Path.Combine(cesta, "opus");
+                    if (archivKOtevreni.SubItems[1].Text != "6")
+                    {
+                        cesta = Path.Combine(cesta, "opus");
+                    }
                     if (Directory.Exists(cesta))
                     {
                         SpustitProgram(cestaMp3tagu, "/fp:\"" + cesta + "\"", false);
@@ -2381,7 +2404,10 @@ namespace alba
                         continue;
                     }
 
-                    cesta = Path.Combine(cesta, "mp3");
+                    if (archivKOtevreni.SubItems[1].Text != "6")
+                    {
+                        cesta = Path.Combine(cesta, "mp3");
+                    }
                     if (Directory.Exists(cesta))
                     {
                         SpustitProgram(cestaMp3tagu, "/fp:\"" + cesta + "\"", false);
