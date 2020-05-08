@@ -7,6 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Collections.Generic;
+using Ookii.Dialogs.Wpf;
 
 namespace alba
 {
@@ -166,17 +167,15 @@ namespace alba
             // slouží k výběru složky pomocí FolderBrowserDialogu
             // a následnému uložení do comboboxu
             comboBoxSlozka.Items.Remove("");
-            using (var vyberSlozku = new FolderBrowserDialog())
+            VistaFolderBrowserDialog vyberSlozku = new VistaFolderBrowserDialog();
+            if (Directory.Exists(comboBoxSlozka.Text))
             {
-                if (Directory.Exists(comboBoxSlozka.Text))
-                {
-                    vyberSlozku.SelectedPath = comboBoxSlozka.Text;
-                }
-                DialogResult odpoved = vyberSlozku.ShowDialog();
-                if (odpoved == DialogResult.OK && !string.IsNullOrWhiteSpace(vyberSlozku.SelectedPath))
-                {
-                    PridejCestu(vyberSlozku.SelectedPath, comboBoxSlozka, false);
-                }
+                vyberSlozku.SelectedPath = comboBoxSlozka.Text;
+            }
+            bool slozkaVybrana = (bool)vyberSlozku.ShowDialog();
+            if (slozkaVybrana && !string.IsNullOrWhiteSpace(vyberSlozku.SelectedPath))
+            {
+                PridejCestu(vyberSlozku.SelectedPath, comboBoxSlozka, false);
             }
         }
         private void comboBox_KeyDown(object sender, KeyEventArgs e)
@@ -1564,6 +1563,31 @@ namespace alba
             // načte všechny archivy ze složky
             NactiArchivyZeSlozky(comboBoxPridaniSlozky_Slozka.Text);
         }
+        // 0 = nepřidáno (chyba)
+        // 1 = nepřidáno (již byl přidán dříve)
+        // 2 = přidáno úspěšně
+        private int PridejArchivNaSeznam(string soubor)
+        {
+            string pripona = Path.GetExtension(soubor);
+            /// DODĚLAT -> přidat další typy souborů ///
+            if (pripona == ".zip" || pripona == ".rar" || pripona == ".tar" || pripona == ".7z")
+            {
+                if (ExistujeCestaVSeznamuPridavanychArchivu(soubor))
+                {
+                    // existuje cesta v seznamu
+                    return 1;
+                }
+                // cesta není v seznamu
+                // -> vytvořím nový item a přidám ho do seznamu archivů
+                ZobrazStavPrubezny("načítám archiv " + soubor);
+                // název archivu, složka, typ archivu, cesta
+                ListViewItem novyArchiv = new ListViewItem(new string[] { Path.GetFileNameWithoutExtension(soubor), new DirectoryInfo(Path.GetDirectoryName(soubor)).Name, pripona.Replace(".", ""), soubor });
+                novyArchiv.Checked = true;
+                listViewPridaniSlozky_SeznamArchivu.Items.Add(novyArchiv);
+                return 2; // nově přidáno
+            }
+            return 0;
+        }
         private void NactiArchivyZeSlozky(string slozka)
         {
             ZobrazStavNovy("načítání archivů ze složky", false);
@@ -1607,26 +1631,14 @@ namespace alba
 
             foreach (string souborZeSlozky in souboryZeSlozky)
             {
-                string pripona = Path.GetExtension(souborZeSlozky);
-                /// DODĚLAT -> přidat další typy souborů ///
-                if (pripona == ".zip" || pripona == ".rar" || pripona == ".tar" || pripona == ".7z")
+                int pridano = PridejArchivNaSeznam(souborZeSlozky);
+                if (pridano == 1)
                 {
-                    if (ExistujeCestaVSeznamuPridavanychArchivu(souborZeSlozky))
-                    {
-                        // existuje cesta v seznamu
-                        pocetJizPridanychArchivu++;
-                    }
-                    else
-                    {
-                        // cesta není v seznamu
-                        // -> vytvořím nový item a přidám ho do seznamu archivů
-                        ZobrazStavPrubezny("načítám archiv " + souborZeSlozky);
-                        // název archivu, složka, typ archivu, cesta
-                        ListViewItem novyArchiv = new ListViewItem(new string[] { Path.GetFileNameWithoutExtension(souborZeSlozky), new DirectoryInfo(Path.GetDirectoryName(souborZeSlozky)).Name, pripona.Replace(".", ""), souborZeSlozky });
-                        novyArchiv.Checked = true;
-                        listViewPridaniSlozky_SeznamArchivu.Items.Add(novyArchiv);
-                        pocetArchivu++;
-                    }
+                    pocetJizPridanychArchivu++;
+                }
+                else if (pridano == 2)
+                {
+                    pocetArchivu++;
                 }
             }
             if (pocetJizPridanychArchivu > 0)
@@ -3080,21 +3092,46 @@ namespace alba
 
         private void listViewPridaniSlozky_SeznamArchivu_DragDrop(object sender, DragEventArgs e)
         {
-            // povoluje přetažení složek na listview
+            // povoluje přetažení složek/archivů na listview
 
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                string[] pretazeneSlozky = (string[])e.Data.GetData(DataFormats.FileDrop);
-                foreach (string pretazenaSlozka in pretazeneSlozky)
+                string[] pretazenePolozky = (string[])e.Data.GetData(DataFormats.FileDrop);
+                foreach (string pretazenaPolozka in pretazenePolozky)
                 {
-                    comboBoxPridaniSlozky_Slozka.Text = pretazenaSlozka;
+                    if (Directory.Exists(pretazenaPolozka))
+                    {
+                        comboBoxPridaniSlozky_Slozka.Text = pretazenaPolozka;
 
-                    // přidání složky do comboboxu se seznamem cest k již dříve otevřeným složkám
-                    PridejCestu(comboBoxPridaniSlozky_Slozka.Text, comboBoxPridaniSlozky_Slozka, false);
-                    // kontrola složky (zdali existuje)
-                    ZkontrolujSlozku(comboBoxPridaniSlozky_Slozka.Text, false, labelPridaniSlozky_Stav);
+                        // přidání složky do comboboxu se seznamem cest k již dříve otevřeným složkám
+                        PridejCestu(comboBoxPridaniSlozky_Slozka.Text, comboBoxPridaniSlozky_Slozka, false);
+                        // kontrola složky (zdali existuje)
+                        ZkontrolujSlozku(comboBoxPridaniSlozky_Slozka.Text, false, labelPridaniSlozky_Stav);
 
-                    NactiArchivyZeSlozky(pretazenaSlozka);
+                        NactiArchivyZeSlozky(pretazenaPolozka);
+                    }
+                    else if (File.Exists(pretazenaPolozka))
+                    {
+                        ZobrazStavNovy("přidávání archivů", false);
+                        int pridano = PridejArchivNaSeznam(pretazenaPolozka);
+                        if (pridano == 1)
+                        {
+                            ZobrazStavPosledni("archiv \"" + pretazenaPolozka + "\" nebyl přidán, protože byl přidán dříve", false);
+                        }
+                        else if (pridano == 2)
+                        {
+                            ZobrazStavPosledni("archiv \"" + pretazenaPolozka + "\" úšpěšně přidán", true);
+                        }
+                        else
+                        {
+                            ZobrazStavPosledni("archiv \"" + pretazenaPolozka + "\" nebyl přidán, protože se nejedná o podporovaný typ souboru", false);
+                        }
+                    }
+                    else
+                    {
+                        ZobrazStavNovy("přidávání archivů", false);
+                        ZobrazStavPosledni("archiv \"" + pretazenaPolozka + "\" nebyl přidán, protože se nejedná o podporovaný typ souboru", false);
+                    }
                 }
             }
         }
