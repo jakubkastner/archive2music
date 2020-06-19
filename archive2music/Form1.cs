@@ -1113,11 +1113,6 @@ namespace alba
             // zobrazí nový cover a informace o něm
             if (File.Exists(cesta))
             {
-                // zobrazí cover na pictureBoxu
-                pictureBoxPridaniUpravaArchivu_Cover.ImageLocation = cesta;
-                toolTipInfo.SetToolTip(pictureBoxPridaniUpravaArchivu_Cover, "Zobrazit obrázek");
-                buttonPridaniUpravaArchivu_CoverSmazat.Enabled = true;
-
                 // načte informace o coveru
                 FileInfo soubor = new FileInfo(cesta);
                 double coverVelikostB = soubor.Length;
@@ -1127,11 +1122,24 @@ namespace alba
 
                 int coverSirka = 0;
                 int coverVyska = 0;
-                using (Bitmap img = new Bitmap(cesta))
+                try
                 {
-                    coverSirka = img.Width;
-                    coverVyska = img.Height;
+                    using (Bitmap img = new Bitmap(cesta))
+                    {
+                        coverSirka = img.Width;
+                        coverVyska = img.Height;
+                    }
                 }
+                catch (Exception)
+                {
+                    ZobrazStavPosledni("nový cover se nepodařilo načíst", false);
+                    return;
+                }
+
+                // zobrazí cover na pictureBoxu
+                pictureBoxPridaniUpravaArchivu_Cover.ImageLocation = cesta;
+                toolTipInfo.SetToolTip(pictureBoxPridaniUpravaArchivu_Cover, "Zobrazit obrázek");
+                buttonPridaniUpravaArchivu_CoverSmazat.Enabled = true;
 
                 // zobrazí načtené informace na labelu
                 labelPridaniUpravaArchivu_CoverInfo.Text = "Název:                " + coverNazev + Environment.NewLine
