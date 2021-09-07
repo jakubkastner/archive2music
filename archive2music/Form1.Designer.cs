@@ -91,7 +91,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.buttonPridaniUpravaArchivu_Nasledujici = new System.Windows.Forms.Button();
             this.buttonPridaniUpravaArchivu_PridatPredchozi = new System.Windows.Forms.Button();
-            this.buttonPridaniUpravaArchivu_Deezer = new System.Windows.Forms.Button();
             this.checkBoxPridaniUpravaArchivu_ArchivHesloZobrazit = new System.Windows.Forms.CheckBox();
             this.checkBoxPridaniUpravaArchivu_UkladatAutomaticky = new System.Windows.Forms.CheckBox();
             this.textBoxPridaniUpravaArchivu_ArchivHeslo = new System.Windows.Forms.TextBox();
@@ -101,7 +100,13 @@
             this.labelPridaniUpravaArchivu_CoverInfo = new System.Windows.Forms.Label();
             this.textBoxPridaniUpravaArchivu_Archiv = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.buttonPridaniUpravaArchivu_Deezer = new System.Windows.Forms.Button();
             this.panelNastaveni = new System.Windows.Forms.Panel();
+            this.label32 = new System.Windows.Forms.Label();
+            this.buttonNastaveni_CacheSlozkaSmazat = new System.Windows.Forms.Button();
+            this.labelNastaveni_CacheSlozka = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
             this.textBoxNastaveni_RozbaleniParametry = new System.Windows.Forms.TextBox();
             this.textBoxNastaveni_AlbumArtParametry = new System.Windows.Forms.TextBox();
             this.checkBoxNastaveni_ZobrazovatPodrobnostiStavu = new System.Windows.Forms.CheckBox();
@@ -177,11 +182,6 @@
             this.buttonZobrazeniArchivu_Mp3TagRozbalene = new System.Windows.Forms.Button();
             this.label49 = new System.Windows.Forms.Label();
             this.backgroundWorkerPresunDoKnihoven = new System.ComponentModel.BackgroundWorker();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.labelNastaveni_CacheSlozka = new System.Windows.Forms.Label();
-            this.buttonNastaveni_CacheSlozkaSmazat = new System.Windows.Forms.Button();
-            this.label32 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPridaniUpravaArchivu_Rok)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPridaniUpravaArchivu_Cover)).BeginInit();
             this.panelPridaniUpravaArchivu.SuspendLayout();
@@ -1071,22 +1071,6 @@
             this.buttonPridaniUpravaArchivu_PridatPredchozi.UseVisualStyleBackColor = false;
             this.buttonPridaniUpravaArchivu_PridatPredchozi.Click += new System.EventHandler(this.buttonPridaniUpravaArchivu_PridatPredchozi_Click);
             // 
-            // buttonPridaniUpravaArchivu_Deezer
-            // 
-            this.buttonPridaniUpravaArchivu_Deezer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))));
-            this.buttonPridaniUpravaArchivu_Deezer.FlatAppearance.BorderSize = 0;
-            this.buttonPridaniUpravaArchivu_Deezer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
-            this.buttonPridaniUpravaArchivu_Deezer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
-            this.buttonPridaniUpravaArchivu_Deezer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPridaniUpravaArchivu_Deezer.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonPridaniUpravaArchivu_Deezer.Location = new System.Drawing.Point(7, 416);
-            this.buttonPridaniUpravaArchivu_Deezer.Name = "buttonPridaniUpravaArchivu_Deezer";
-            this.buttonPridaniUpravaArchivu_Deezer.Size = new System.Drawing.Size(125, 22);
-            this.buttonPridaniUpravaArchivu_Deezer.TabIndex = 52;
-            this.buttonPridaniUpravaArchivu_Deezer.Text = "Deezer search";
-            this.buttonPridaniUpravaArchivu_Deezer.UseVisualStyleBackColor = false;
-            this.buttonPridaniUpravaArchivu_Deezer.Click += new System.EventHandler(this.buttonPridaniUpravaArchivu_Deezer_Click);
-            // 
             // checkBoxPridaniUpravaArchivu_ArchivHesloZobrazit
             // 
             this.checkBoxPridaniUpravaArchivu_ArchivHesloZobrazit.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -1188,6 +1172,22 @@
             this.label16.Text = "ARCHIV A SLOŽKY";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // buttonPridaniUpravaArchivu_Deezer
+            // 
+            this.buttonPridaniUpravaArchivu_Deezer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))));
+            this.buttonPridaniUpravaArchivu_Deezer.FlatAppearance.BorderSize = 0;
+            this.buttonPridaniUpravaArchivu_Deezer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.buttonPridaniUpravaArchivu_Deezer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            this.buttonPridaniUpravaArchivu_Deezer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPridaniUpravaArchivu_Deezer.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonPridaniUpravaArchivu_Deezer.Location = new System.Drawing.Point(7, 416);
+            this.buttonPridaniUpravaArchivu_Deezer.Name = "buttonPridaniUpravaArchivu_Deezer";
+            this.buttonPridaniUpravaArchivu_Deezer.Size = new System.Drawing.Size(125, 22);
+            this.buttonPridaniUpravaArchivu_Deezer.TabIndex = 52;
+            this.buttonPridaniUpravaArchivu_Deezer.Text = "Deezer search";
+            this.buttonPridaniUpravaArchivu_Deezer.UseVisualStyleBackColor = false;
+            this.buttonPridaniUpravaArchivu_Deezer.Click += new System.EventHandler(this.buttonPridaniUpravaArchivu_Deezer_Click);
+            // 
             // panelNastaveni
             // 
             this.panelNastaveni.AllowDrop = true;
@@ -1247,6 +1247,71 @@
             this.panelNastaveni.TabIndex = 53;
             this.panelNastaveni.DragDrop += new System.Windows.Forms.DragEventHandler(this.comboBoxSoubor_DragDrop);
             this.panelNastaveni.DragEnter += new System.Windows.Forms.DragEventHandler(this.prvek_DragEnter);
+            // 
+            // label32
+            // 
+            this.label32.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
+            this.label32.Location = new System.Drawing.Point(0, 446);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(130, 22);
+            this.label32.TabIndex = 48;
+            this.label32.Text = "Stav";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // buttonNastaveni_CacheSlozkaSmazat
+            // 
+            this.buttonNastaveni_CacheSlozkaSmazat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonNastaveni_CacheSlozkaSmazat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))));
+            this.buttonNastaveni_CacheSlozkaSmazat.FlatAppearance.BorderSize = 0;
+            this.buttonNastaveni_CacheSlozkaSmazat.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.buttonNastaveni_CacheSlozkaSmazat.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            this.buttonNastaveni_CacheSlozkaSmazat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNastaveni_CacheSlozkaSmazat.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonNastaveni_CacheSlozkaSmazat.Location = new System.Drawing.Point(686, 473);
+            this.buttonNastaveni_CacheSlozkaSmazat.Name = "buttonNastaveni_CacheSlozkaSmazat";
+            this.buttonNastaveni_CacheSlozkaSmazat.Size = new System.Drawing.Size(110, 22);
+            this.buttonNastaveni_CacheSlozkaSmazat.TabIndex = 47;
+            this.buttonNastaveni_CacheSlozkaSmazat.Text = "Vymazat cache";
+            this.buttonNastaveni_CacheSlozkaSmazat.UseVisualStyleBackColor = false;
+            this.buttonNastaveni_CacheSlozkaSmazat.Click += new System.EventHandler(this.buttonNastaveni_CacheSlozkaSmazat_Click);
+            // 
+            // labelNastaveni_CacheSlozka
+            // 
+            this.labelNastaveni_CacheSlozka.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelNastaveni_CacheSlozka.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
+            this.labelNastaveni_CacheSlozka.Location = new System.Drawing.Point(136, 473);
+            this.labelNastaveni_CacheSlozka.Name = "labelNastaveni_CacheSlozka";
+            this.labelNastaveni_CacheSlozka.Size = new System.Drawing.Size(545, 22);
+            this.labelNastaveni_CacheSlozka.TabIndex = 46;
+            this.labelNastaveni_CacheSlozka.Text = "Cesta";
+            this.labelNastaveni_CacheSlozka.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelNastaveni_CacheSlozka.Click += new System.EventHandler(this.labelNastaveni_CacheSlozka_Click);
+            // 
+            // label31
+            // 
+            this.label31.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
+            this.label31.Location = new System.Drawing.Point(0, 473);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(130, 22);
+            this.label31.TabIndex = 46;
+            this.label31.Text = "Složka cache";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label29
+            // 
+            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.label29.Font = new System.Drawing.Font("Calibri", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label29.Location = new System.Drawing.Point(0, 414);
+            this.label29.Name = "label29";
+            this.label29.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.label29.Size = new System.Drawing.Size(1085, 25);
+            this.label29.TabIndex = 45;
+            this.label29.Text = "DALŠÍ NASTAVENÍ";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBoxNastaveni_RozbaleniParametry
             // 
@@ -2216,71 +2281,6 @@
             this.backgroundWorkerPresunDoKnihoven.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerPresunDoKnihoven_ProgressChanged);
             this.backgroundWorkerPresunDoKnihoven.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerPresunDoKnihoven_RunWorkerCompleted);
             // 
-            // label29
-            // 
-            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
-            this.label29.Font = new System.Drawing.Font("Calibri", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label29.Location = new System.Drawing.Point(0, 414);
-            this.label29.Name = "label29";
-            this.label29.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.label29.Size = new System.Drawing.Size(1085, 25);
-            this.label29.TabIndex = 45;
-            this.label29.Text = "DALŠÍ NASTAVENÍ";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label31
-            // 
-            this.label31.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
-            this.label31.Location = new System.Drawing.Point(0, 473);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(130, 22);
-            this.label31.TabIndex = 46;
-            this.label31.Text = "Složka cache";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelNastaveni_CacheSlozka
-            // 
-            this.labelNastaveni_CacheSlozka.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelNastaveni_CacheSlozka.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
-            this.labelNastaveni_CacheSlozka.Location = new System.Drawing.Point(136, 473);
-            this.labelNastaveni_CacheSlozka.Name = "labelNastaveni_CacheSlozka";
-            this.labelNastaveni_CacheSlozka.Size = new System.Drawing.Size(545, 22);
-            this.labelNastaveni_CacheSlozka.TabIndex = 46;
-            this.labelNastaveni_CacheSlozka.Text = "Cesta";
-            this.labelNastaveni_CacheSlozka.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelNastaveni_CacheSlozka.Click += new System.EventHandler(this.labelNastaveni_CacheSlozka_Click);
-            // 
-            // buttonNastaveni_CacheSlozkaSmazat
-            // 
-            this.buttonNastaveni_CacheSlozkaSmazat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonNastaveni_CacheSlozkaSmazat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))));
-            this.buttonNastaveni_CacheSlozkaSmazat.FlatAppearance.BorderSize = 0;
-            this.buttonNastaveni_CacheSlozkaSmazat.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
-            this.buttonNastaveni_CacheSlozkaSmazat.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
-            this.buttonNastaveni_CacheSlozkaSmazat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonNastaveni_CacheSlozkaSmazat.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonNastaveni_CacheSlozkaSmazat.Location = new System.Drawing.Point(686, 473);
-            this.buttonNastaveni_CacheSlozkaSmazat.Name = "buttonNastaveni_CacheSlozkaSmazat";
-            this.buttonNastaveni_CacheSlozkaSmazat.Size = new System.Drawing.Size(110, 22);
-            this.buttonNastaveni_CacheSlozkaSmazat.TabIndex = 47;
-            this.buttonNastaveni_CacheSlozkaSmazat.Text = "Vymazat cache";
-            this.buttonNastaveni_CacheSlozkaSmazat.UseVisualStyleBackColor = false;
-            this.buttonNastaveni_CacheSlozkaSmazat.Click += new System.EventHandler(this.buttonNastaveni_CacheSlozkaSmazat_Click);
-            // 
-            // label32
-            // 
-            this.label32.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
-            this.label32.Location = new System.Drawing.Point(0, 446);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(130, 22);
-            this.label32.TabIndex = 48;
-            this.label32.Text = "Stav";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2291,10 +2291,10 @@
             this.ClientSize = new System.Drawing.Size(1084, 772);
             this.Controls.Add(this.listViewStav);
             this.Controls.Add(this.panelMenu);
+            this.Controls.Add(this.panelNastaveni);
             this.Controls.Add(this.panelPridaniSlozky);
             this.Controls.Add(this.panelPridaniUpravaArchivu);
             this.Controls.Add(this.panelZobrazeniArchivu);
-            this.Controls.Add(this.panelNastaveni);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

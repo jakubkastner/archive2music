@@ -220,12 +220,12 @@ namespace alba
             // zkontroluji existenci složky 
             ZkontrolujSlozku(comboBoxNastaveni_SlozkaOpus.Text, false, labelNastaveni_SlozkaOpusStav);
 
-            if (String.IsNullOrEmpty(labelNastaveni_SlozkaOpusStav.Text))
+            /*if (String.IsNullOrEmpty(labelNastaveni_SlozkaOpusStav.Text))
             {
                 // složka existuje
                 // -> zkontoluji zda-li existují v dané složce podsložky žánru
                 ZkontrolujSlozku(Path.Combine(comboBoxNastaveni_SlozkaOpus.Text, comboBoxPridaniUpravaArchivu_SlozkaZanr.Text), true, labelNastaveni_SlozkaOpusStav);
-            }
+            }*/
 
             if (!String.IsNullOrEmpty(labelNastaveni_SlozkaOpusStav.Text))
             {
@@ -287,12 +287,12 @@ namespace alba
             // zkontroluji existenci složky 
             ZkontrolujSlozku(comboBoxNastaveni_SlozkaMp3.Text, false, labelNastaveni_SlozkaMp3Stav);
 
-            if (String.IsNullOrEmpty(labelNastaveni_SlozkaMp3Stav.Text))
+            /*if (String.IsNullOrEmpty(labelNastaveni_SlozkaMp3Stav.Text))
             {
                 // složka existuje
                 // -> zkontoluji zda-li existují v dané složce podsložky žánru
                 ZkontrolujSlozku(Path.Combine(comboBoxNastaveni_SlozkaMp3.Text, comboBoxPridaniUpravaArchivu_SlozkaZanr.Text), true, labelNastaveni_SlozkaMp3Stav);
-            }
+            }*/
 
             if (!String.IsNullOrEmpty(labelNastaveni_SlozkaMp3Stav.Text))
             {
@@ -578,6 +578,15 @@ namespace alba
             NactiSoubor(Path.Combine(slozkaProgramuData, "h_archiv.txt"), comboBoxPridaniUpravaArchivu_Archiv);
             ZkontrolujSoubor(comboBoxPridaniUpravaArchivu_Archiv.Text, new string[] { ".zip", ".rar", ".tar", ".7z" }, labelPridaniUpravaArchivu_ArchivStav);
 
+            ZiskejZanrySlozek();
+        }
+        
+        /*
+         * Získá žánry z hudbních složek
+         */
+        private void ZiskejZanrySlozek()
+        {
+            comboBoxPridaniUpravaArchivu_SlozkaZanr.Items.Clear();
             // získej upřesnění hudebních složek
             List<string> zanrySlozky = new List<string>();
             List<string> zanrySlozkyMp3 = NactiSlozkyStart(comboBoxNastaveni_SlozkaMp3.Text, labelNastaveni_SlozkaMp3Stav);
@@ -609,6 +618,7 @@ namespace alba
                 }
             }
         }
+
         private List<string> NactiSlozkyStart(string slozka, Label labelStav)
         {
             ZobrazStavNovy("načítání složek hudební knihovny", false);
@@ -728,12 +738,24 @@ namespace alba
             {
                 using (StreamWriter uloz = new StreamWriter(streamUloz, Encoding.Default))
                 {
+                    string posledni = "";
                     foreach (string cestaUloz in comboBoxUlozeni.Items)
                     {
                         if (!String.IsNullOrEmpty(cestaUloz))
                         {
-                            uloz.WriteLine(cestaUloz);
+                            if (comboBoxUlozeni.Text == cestaUloz)
+                            {
+                                posledni = cestaUloz;
+                            }
+                            else
+                            {
+                                uloz.WriteLine(cestaUloz);
+                            }
                         }
+                    }
+                    if (!String.IsNullOrEmpty(posledni))
+                    {
+                        uloz.WriteLine(posledni);
                     }
                 }
             }
@@ -752,12 +774,14 @@ namespace alba
         {
             ZkontrolujSlozkuOpus();
             PridejCestu(comboBoxNastaveni_SlozkaOpus.Text, comboBoxNastaveni_SlozkaOpus, false);
+            ZiskejZanrySlozek();
         }
         private void buttonNastaveni_SlozkaOpusVybrat_Click(object sender, EventArgs e)
         {
             VyberSlozky(comboBoxNastaveni_SlozkaOpus);
             ZkontrolujSlozkuOpus();
             PridejCestu(comboBoxNastaveni_SlozkaOpus.Text, comboBoxNastaveni_SlozkaOpus, false);
+            ZiskejZanrySlozek();
         }
 
         private void labelNastaveni_SlozkaMp3Otevrit_Click(object sender, EventArgs e)
@@ -769,12 +793,14 @@ namespace alba
         {
             ZkontrolujSlozkuMp3();
             PridejCestu(comboBoxNastaveni_SlozkaMp3.Text, comboBoxNastaveni_SlozkaMp3, false);
+            ZiskejZanrySlozek();
         }
         private void buttonNastaveni_SlozkaMp3Vybrat_Click(object sender, EventArgs e)
         {
             VyberSlozky(comboBoxNastaveni_SlozkaMp3);
             ZkontrolujSlozkuMp3();
             PridejCestu(comboBoxNastaveni_SlozkaMp3.Text, comboBoxNastaveni_SlozkaMp3, false);
+            ZiskejZanrySlozek();
         }
 
         private void comboBoxNastaveni_Rozbaleni_Leave(object sender, EventArgs e)
@@ -3435,7 +3461,7 @@ namespace alba
 
         private void buttonNastaveni_CacheSlozkaSmazat_Click(object sender, EventArgs e)
         {
-            ZobrazStavPrubezny("Mažu cache programu");
+            ZobrazStavNovy("mazání cache programu", false);
             // získá složku do které se ukládají cache složky spuštěných instancí programu
             string slozkaCache = Directory.GetParent(slozkaProgramuCache).FullName;
             int chyby = 0;
