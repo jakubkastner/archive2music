@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "archive2music", "archive2music\archive2music.csproj", "{98030BD4-3303-4656-8A4A-F65935C5121D}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "archive2music_installer", "archive2music_installer\installer.vdproj", "{7C73FE60-06AD-41CF-B76F-E8D24C0AEAAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{98030BD4-3303-4656-8A4A-F65935C5121D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98030BD4-3303-4656-8A4A-F65935C5121D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98030BD4-3303-4656-8A4A-F65935C5121D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C73FE60-06AD-41CF-B76F-E8D24C0AEAAD}.Debug|Any CPU.ActiveCfg = Debug
+		{7C73FE60-06AD-41CF-B76F-E8D24C0AEAAD}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

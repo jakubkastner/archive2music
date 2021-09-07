@@ -426,6 +426,15 @@ namespace alba
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // menu tooltip
+            toolTipInfo.SetToolTip(buttonMenuPridaniSlozky, "Přidání složky nebo více archivů ze složky");
+            toolTipInfo.SetToolTip(buttonMenuPridaniArchivu, "Přidání jednoho archivu");
+            toolTipInfo.SetToolTip(buttonMenuZobrazeniArchivu, "Zobrazení přidaných složek/archivů");
+            toolTipInfo.SetToolTip(buttonMenuUpravaArchivu, "Úprava přidaných složek/archivů");
+            toolTipInfo.SetToolTip(buttonMenuNastaveni, "Nastavení programu");
+
+            labelNastaveni_CacheSlozka.Text = "";
+
             // zatím nedodělané funkce
             checkBoxPridaniUpravaArchivu_PrepsatSoubory.Visible = false;
 
@@ -462,12 +471,15 @@ namespace alba
             try
             {
                 Directory.CreateDirectory(slozkaProgramuCache);
+                labelNastaveni_CacheSlozka.Text = slozkaProgramuCache;
+                toolTipInfo.SetToolTip(labelNastaveni_CacheSlozka, "Otevřít složku");
             }
             catch (Exception ex)
             {
                 ZobrazChybu(ex.Message, "Spuštění programu");
                // return;
             }
+
             // pokud neexistuje složka data, vytvořím ji
             slozkaProgramuData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "archive2music", "data");
             try
@@ -498,7 +510,6 @@ namespace alba
 
             // -> rozbalení
             labelPridaniUpravaArchivu_ArchivStav.Text = "Soubor neexistuje!";
-            comboBoxPridaniUpravaArchivu_SlozkaZanr.SelectedIndex = 0;
             numericUpDownPridaniUpravaArchivu_Rok.Maximum = DateTime.Now.Year;
             if (DateTime.Now.Year >= numericUpDownPridaniUpravaArchivu_Rok.Minimum && DateTime.Now.Year <= numericUpDownPridaniUpravaArchivu_Rok.Maximum)
             {
@@ -566,6 +577,73 @@ namespace alba
             // -> rozbalení
             NactiSoubor(Path.Combine(slozkaProgramuData, "h_archiv.txt"), comboBoxPridaniUpravaArchivu_Archiv);
             ZkontrolujSoubor(comboBoxPridaniUpravaArchivu_Archiv.Text, new string[] { ".zip", ".rar", ".tar", ".7z" }, labelPridaniUpravaArchivu_ArchivStav);
+
+            // získej upřesnění hudebních složek
+            List<string> zanrySlozky = new List<string>();
+            List<string> zanrySlozkyMp3 = NactiSlozkyStart(comboBoxNastaveni_SlozkaMp3.Text, labelNastaveni_SlozkaMp3Stav);
+            List<string> zanrySlozkyOpus = NactiSlozkyStart(comboBoxNastaveni_SlozkaOpus.Text, labelNastaveni_SlozkaOpusStav);
+            if (zanrySlozkyMp3 != null)
+            {
+                zanrySlozky = zanrySlozkyMp3;
+            }
+            if (zanrySlozkyOpus != null)
+            {
+                foreach (string slozkaOpus in zanrySlozkyOpus)
+                {
+                    if (!zanrySlozkyMp3.Contains(slozkaOpus))
+                    {
+                        zanrySlozky.Add(slozkaOpus);
+                    }
+                }
+            }
+            if (zanrySlozky.Count > 0)
+            {
+                foreach (string slozka in zanrySlozky)
+                {
+                    comboBoxPridaniUpravaArchivu_SlozkaZanr.Items.Add(slozka);
+
+                }
+                if (comboBoxPridaniUpravaArchivu_SlozkaZanr.Items.Count > 0)
+                {
+                    comboBoxPridaniUpravaArchivu_SlozkaZanr.SelectedIndex = 0;
+                }
+            }
+        }
+        private List<string> NactiSlozkyStart(string slozka, Label labelStav)
+        {
+            ZobrazStavNovy("načítání složek hudební knihovny", false);
+            // kontrola složky
+            //ZkontrolujSlozku(slozka, false, labelPridaniSlozky_Stav);
+
+            if (!String.IsNullOrEmpty(labelStav.Text))
+            {
+                // pokud je nějaká chyba, ukončím a zobrazím messagebox
+                ZobrazChybu(labelStav.Text, "Načítání složek hudební knihovny");
+                ZobrazStavPosledni(labelStav.Text, false);
+                return null;
+            }
+
+            int pocetSlozek = 0;
+            // získám soubory ze složky
+            List<string> seznamSlozek = null;
+            try
+            {
+                seznamSlozek = Directory.GetDirectories(slozka).ToList();
+            }
+            catch (Exception ex)
+            {
+                ZobrazChybu(ex.Message, "Načítání složek hudební knihovny");
+                ZobrazStavPosledni("nepodařilo se získat všechny složky hudební knihovny", false);
+                return null;
+            }
+            List<string> seznamSlozekNazvy = new List<string>();
+            foreach (string slozkaSeznam in seznamSlozek)
+            {
+                string nazevSlozky = new DirectoryInfo(slozkaSeznam).Name;
+                seznamSlozekNazvy.Add(nazevSlozky);
+            }
+            ZobrazStavPosledni("bylo načteno " + pocetSlozek + " složek hudební knihovny", true);
+            return seznamSlozekNazvy;
         }
 
         private void NactiSoubor(string cesta, ComboBox comboBoxPridani)
@@ -1015,7 +1093,7 @@ namespace alba
             ZkontrolujSoubor(comboBoxNastaveni_Deezer.Text, ".exe", labelNastaveni_DeezerStav);
             if (ZkontrolujPredSpoustenim(labelNastaveni_DeezerStav.Text, true))
             {
-                string slozka = Path.GetDirectoryName(comboBoxNastaveni_Deezer.Text);
+                /*string slozka = Path.GetDirectoryName(comboBoxNastaveni_Deezer.Text);
                 if (Directory.Exists(slozka))
                 {
                     ZobrazStavPrubezny("měním nastavení programu deezer search");
@@ -1024,8 +1102,25 @@ namespace alba
                 else
                 {
                     ZobrazStavPosledni("nastavení programu deezer search se nezdařilo", true);
+                }*/
+                SpustitProgram(comboBoxNastaveni_Deezer.Text, "\"" + textBoxPridaniUpravaArchivu_Interpret.Text + "\" \"" + textBoxPridaniUpravaArchivu_Album.Text + "\"" + " \"" + slozkaProgramuCache + "\" \"_cover\"", true);
+                if (File.Exists(Path.Combine(slozkaProgramuCache, "_cover.jpg")))
+                {
+                    // nový cover byl vybrán
+                    // -> smažu starý cover
+                    ZobrazStavPrubezny("mažu předchozí cover");
+                    CoverSmaz(true);
+                    // -> přejmenuji získaný cover ("_cover.jpg") na "cover.jpg"
+                    PresunSoubor(Path.Combine(slozkaProgramuCache, "_cover.jpg"), Path.Combine(slozkaProgramuCache, "cover.jpg"));
+                    // zobrazí obrázek
+                    ZobrazStavPrubezny("načítám informace o coveru");
+                    CoverZobraz(Path.Combine(slozkaProgramuCache, "cover.jpg"));
+                    ZobrazStavPosledni("cover byl úspěšně změněn", true);
                 }
-                SpustitProgram(comboBoxNastaveni_Deezer.Text, "\"" + textBoxPridaniUpravaArchivu_Interpret.Text + "\" \"" + textBoxPridaniUpravaArchivu_Album.Text + "\"", true);
+                else
+                {
+                    ZobrazStavPosledni("cover nebyl změněn, protože nebyl vybrán nový", true);
+                }
             }
             else
             {
@@ -1333,6 +1428,10 @@ namespace alba
                         labelPridaniUpravaArchivu_SlozkaMp3Cesta.Text,
                         coverCesta
                     });
+            if (labelPridaniUpravaArchivu_Stav.Text == "-1")
+            {
+                novyArchiv.SubItems[1].Text = "-1";
+            }
             novyArchiv.ToolTipText = comboBoxPridaniUpravaArchivu_Archiv.Text;
             novyArchiv.Tag = textBoxPridaniUpravaArchivu_ArchivHeslo.Text;
             if (!String.IsNullOrEmpty(textBoxPridaniUpravaArchivu_ArchivHeslo.Text))
@@ -1354,6 +1453,10 @@ namespace alba
             {
                 // stav: 1 = vyplněna složka (interpret, album, rok)
                 novyArchiv.SubItems[1].Text = "1";
+                if (labelPridaniUpravaArchivu_Stav.Text == "-1" || labelPridaniUpravaArchivu_Stav.Text == "-2")
+                {
+                    novyArchiv.SubItems[1].Text = "-2";
+                }
             }
             if (novy)
             {
@@ -1365,6 +1468,13 @@ namespace alba
             else
             {
                 novyArchiv.SubItems[0].Text = Path.GetFileNameWithoutExtension(textBoxPridaniUpravaArchivu_Archiv.Text);
+                if (labelPridaniUpravaArchivu_Stav.Text == "-1" || labelPridaniUpravaArchivu_Stav.Text == "-2")
+                {
+                    if (Directory.Exists(textBoxPridaniUpravaArchivu_Archiv.Text))
+                    {
+                        novyArchiv.SubItems[0].Text = new DirectoryInfo(Path.GetDirectoryName(textBoxPridaniUpravaArchivu_Archiv.Text)).Name;
+                    }
+                }
                 novyArchiv.ToolTipText = textBoxPridaniUpravaArchivu_Archiv.Text;
                 ListViewItem upravovanyArchiv = listViewZobrazeniArchivu_SeznamArchivu.Items[indexArchivu];
                 // úprava stávajícího
@@ -1375,7 +1485,7 @@ namespace alba
                     novyArchiv.Checked = true;
                 }
                 // pokud byl stav původního archivu 0 nebo 1, neřeším nic
-                if (upravovanyArchiv.SubItems[1].Text != "0" && upravovanyArchiv.SubItems[1].Text != "1")
+                if (upravovanyArchiv.SubItems[1].Text != "0" && upravovanyArchiv.SubItems[1].Text != "1" && upravovanyArchiv.SubItems[1].Text != "-1" && upravovanyArchiv.SubItems[1].Text != "-2")
                 {
                     // stav nebyl 0 nebo 1
                     // tzn je 2 a výš
@@ -1511,6 +1621,7 @@ namespace alba
             {
                 numericUpDownPridaniUpravaArchivu_Rok.Value = Convert.ToInt32(archiv.SubItems[4].Text);
             }
+            labelPridaniUpravaArchivu_Stav.Text = archiv.SubItems[1].Text; ;
             textBoxPridaniUpravaArchivu_Album.Text = archiv.SubItems[5].Text;
             if (String.IsNullOrEmpty(archiv.SubItems[6].Text))
             {
@@ -1709,7 +1820,7 @@ namespace alba
             else
             {
                 buttonPridaniSlozky_PridatArchivy.Enabled = true;
-                labelPridaniSlozky_VybraneArchivy.Text = listViewPridaniSlozky_SeznamArchivu.CheckedItems.Count + " vybraných archivů z " + listViewPridaniSlozky_SeznamArchivu.Items.Count + " archivů ze složky";
+                labelPridaniSlozky_VybraneArchivy.Text = listViewPridaniSlozky_SeznamArchivu.CheckedItems.Count + " vybraných složek/archivů z " + listViewPridaniSlozky_SeznamArchivu.Items.Count + " složek / archivů ze složky";
             }
         }
         private void buttonPridaniSlozky_PridatArchivy_Click(object sender, EventArgs e)
@@ -1749,7 +1860,13 @@ namespace alba
 
                     // 0 název, 1 stav, 2 heslo (někdy skryté), 3 interpret, 4 rok, 5 album, 6 žánr, 7 složka opus, 8 složka mp3, 9 cover
                     // tag = heslo, tooltiptext = cesta
-                    ListViewItem novyArchiv = new ListViewItem(new string[] { archivZeSeznamu.SubItems[0].Text, "0", "", "", "", "", "", "", "", "" });
+                    string stav = "0";
+                    if (archivZeSeznamu.SubItems[2].Text == "složka")
+                    {
+                        // jedná se o složku (typ == složka)
+                        stav = "-1";
+                    }
+                    ListViewItem novyArchiv = new ListViewItem(new string[] { archivZeSeznamu.SubItems[0].Text, stav, "", "", "", "", "", "", "", "" });
                     novyArchiv.ToolTipText = archivZeSeznamu.SubItems[3].Text; // cesta
                     novyArchiv.Tag = "";
                     novyArchiv.Checked = true;
@@ -2209,6 +2326,13 @@ namespace alba
                     continue;
                 }
                 ZobrazStavPrubezny("rozbaluji archiv " + archivKRozbaleni.ToolTipText);
+                if (archivKRozbaleni.SubItems[1].Text == "-1")
+                {
+                    // stav archivu je -1
+                    // tz. není vyplněna složka a další info o archivu
+                    ZobrazStavPosledni("archiv " + archivKRozbaleni.SubItems[0].Text + " se nepodařilo rozbalit, doplňte informace o archivu (interpret, album, rok a hudební složky)", false);
+                    continue;
+                }
                 if (archivKRozbaleni.SubItems[1].Text == "0")
                 {
                     // stav archivu je 0
@@ -2796,7 +2920,8 @@ namespace alba
                         if (souborOstatniKoncovka == ".wma" || souborOstatniKoncovka == ".ogg" || souborOstatniKoncovka == ".flac" ||
                             souborOstatniKoncovka == ".mpc" || souborOstatniKoncovka == ".acc" || souborOstatniKoncovka == ".alac" ||
                             souborOstatniKoncovka == ".tak" || souborOstatniKoncovka == ".wma" || souborOstatniKoncovka == ".wavpack" ||
-                            souborOstatniKoncovka == ".wav" || souborOstatniKoncovka == ".m4a" || souborOstatniKoncovka == koncovkaOstatni)
+                            souborOstatniKoncovka == ".wav" || souborOstatniKoncovka == ".m4a" || souborOstatniKoncovka == ".aiff" ||
+                            souborOstatniKoncovka == koncovkaOstatni)
                         {
                             prevadec.ReportProgress(1, "převádím soubor " + Path.GetFileName(souborOstatni));
 
@@ -3197,6 +3322,159 @@ namespace alba
                 }
             }
         }
+
+        private void buttonPridaniSlozky_NacistSlozku_Click(object sender, EventArgs e)
+        {
+            // načte všechny archivy ze složky
+            NactiSlozky(comboBoxPridaniSlozky_Slozka.Text);
+        }
+        private void NactiSlozky(string slozka)
+        {
+            ZobrazStavNovy("načítání složek", false);
+            // kontrola složky
+            ZkontrolujSlozku(slozka, false, labelPridaniSlozky_Stav);
+
+            if (!String.IsNullOrEmpty(labelPridaniSlozky_Stav.Text))
+            {
+                // pokud je nějaká chyba, ukončím a zobrazím messagebox
+                ZobrazChybu(labelPridaniSlozky_Stav.Text, "Načítání složek");
+                ZobrazStavPosledni(labelPridaniSlozky_Stav.Text, false);
+                return;
+            }
+
+            int pocetSlozek = 0;
+            int pocetJizPridanychSlozek = 0;
+            // získám soubory ze složky
+            List<string> seznamSlozek = new List<string>();
+            seznamSlozek.Add(slozka);
+            try
+            {
+                if (checkBoxPridaniSlozky_NacistPodslozky.Checked)
+                {
+                    seznamSlozek.AddRange(Directory.GetDirectories(slozka, "", SearchOption.AllDirectories).ToList());
+                }
+            }
+            catch (Exception ex)
+            {
+                ZobrazChybu(ex.Message, "Načítání složek");
+                ZobrazStavPosledni("nepodařilo se získat všechny podsložky", false);
+                return;
+            }
+
+            if (checkBoxPridaniSlozky_odstranitNacteneArchivy.Checked)
+            {
+                listViewPridaniSlozky_SeznamArchivu.Items.Clear();
+            }
+
+            foreach (string slozkaZeSeznamu in seznamSlozek)
+            {
+                int pridano = PridejSlozkuNaSeznam(slozkaZeSeznamu);
+                if (pridano == 1)
+                {
+                    pocetJizPridanychSlozek++;
+                }
+                else if (pridano == 2)
+                {
+                    pocetSlozek++;
+                }
+            }
+            if (pocetJizPridanychSlozek > 0)
+            {
+                // nalezeny nějaké již dříve přidané archivy
+                if (pocetSlozek < 1)
+                {
+                    ZobrazStavPosledni("nebylo načteno " + pocetJizPridanychSlozek + " již dříve přidaných složek", false);
+                }
+                else
+                {
+                    ZobrazStavPosledni("bylo načteno " + pocetSlozek + " složek a nebylo přidáno " + pocetJizPridanychSlozek + " již dříve načtených složek", true);
+                }
+            }
+            else
+            {
+                if (pocetSlozek < 1)
+                {
+                    ZobrazStavPosledni("nebyla nazelena žádná složka", false);
+                }
+                else
+                {
+                    ZobrazStavPosledni("bylo načteno " + pocetSlozek + " složek", true);
+                }
+            }
+        }
+        // 0 = nepřidáno (chyba)
+        // 1 = nepřidáno (již byl přidán dříve)
+        // 2 = přidáno úspěšně
+        private int PridejSlozkuNaSeznam(string slozka)
+        {
+            /// DODĚLAT -> přidat další typy souborů ///
+            if (ExistujeCestaVSeznamuPridavanychArchivu(slozka))
+            {
+                // existuje cesta v seznamu
+                return 1;
+            }
+            // cesta není v seznamu
+            // -> vytvořím nový item a přidám ho do seznamu archivů
+            ZobrazStavPrubezny("načítám archiv " + slozka);
+            if (slozka.Last() != '\\')
+            {
+                slozka = slozka + '\\';
+            }
+            // název archivu, složka, typ archivu, cesta
+            ListViewItem novaSlozka = new ListViewItem(new string[] { new DirectoryInfo(Path.GetDirectoryName(slozka)).Name, new DirectoryInfo(Path.GetDirectoryName(slozka)).Name, "složka", slozka });
+            novaSlozka.Checked = true;
+            listViewPridaniSlozky_SeznamArchivu.Items.Add(novaSlozka);
+            return 2; // nově přidáno
+        }
+
+        private void labelNastaveni_CacheSlozka_Click(object sender, EventArgs e)
+        {
+            // otevře cache složku
+            SpustitProgram(slozkaProgramuCache, "", false);
+        }
+
+        private void buttonNastaveni_CacheSlozkaSmazat_Click(object sender, EventArgs e)
+        {
+            ZobrazStavPrubezny("Mažu cache programu");
+            // získá složku do které se ukládají cache složky spuštěných instancí programu
+            string slozkaCache = Directory.GetParent(slozkaProgramuCache).FullName;
+            int chyby = 0;
+
+            List<string> slozky;
+            try
+            {
+                slozky = Directory.GetDirectories(slozkaCache).ToList();
+            }
+            catch (Exception ex)
+            {
+                ZobrazStavPosledni("cache se nepodařilo smazat", false);
+                ZobrazChybu(ex.Message, "Vymazání cache");
+                return;
+            }
+            foreach (string slozka in slozky)
+            {
+                // cesty nejsou stejné jako s aktuálně používanou složkou cache
+                if (!Path.GetFullPath(slozka).Equals(Path.GetFullPath(slozkaProgramuCache)))
+                {
+                    try
+                    {
+                        ZobrazStavPrubezny("odstraňuji složku " + slozka);
+                        Directory.Delete(slozka, true);
+                    }
+                    catch (Exception)
+                    {
+                        chyby++;
+                        ZobrazStavPrubezny("složku '" + slozka + "' se nepodařilo odstranit");
+                    }
+                }
+            }
+            if (chyby != 0)
+            {
+                ZobrazStavPosledni("některé složky cache (" + chyby + ") se nepodařilo odstranit, zkuste je odstranit ručně", false);
+                return;
+            }
+            ZobrazStavPosledni("cache bylo úspěšně vymazáno", true);
+        }
     }
 }
 
@@ -3209,6 +3487,8 @@ namespace alba
     4 = převedeno na opus
     5 = 1 + 2 + 3 + 4
     6 = přesunuto do knihovny
+    
+    nový -1 = složka již přidaná (není potřeba rozbalit)
 
     musí být splněno
     -> 0
