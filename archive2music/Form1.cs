@@ -1345,7 +1345,7 @@ namespace alba
                         ZobrazStavPosledni("archiv byl přidán do seznamu dříve, ale jeho cesta byla změněna", true);
                     }
                 }
-
+                MenuPrepni(buttonMenuZobrazeniArchivu, panelZobrazeniArchivu);
             }
             else
             {
@@ -2002,6 +2002,7 @@ namespace alba
             }
             // aktualizace labelu, který zobrazuje počet zaškrtnutých archivů
             listViewPridaniSlozky_SeznamArchivu_ItemChecked(null, null);
+            MenuPrepni(buttonMenuZobrazeniArchivu, panelZobrazeniArchivu);
         }
         private int ExistujeCestaVSeznamuArchivu(string cestaKProhledani)
         {
