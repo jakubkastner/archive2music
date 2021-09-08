@@ -2348,10 +2348,10 @@
             this.ClientSize = new System.Drawing.Size(1084, 772);
             this.Controls.Add(this.listViewStav);
             this.Controls.Add(this.panelMenu);
-            this.Controls.Add(this.panelPridaniUpravaArchivu);
-            this.Controls.Add(this.panelZobrazeniArchivu);
             this.Controls.Add(this.panelNastaveni);
             this.Controls.Add(this.panelPridaniSlozky);
+            this.Controls.Add(this.panelPridaniUpravaArchivu);
+            this.Controls.Add(this.panelZobrazeniArchivu);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

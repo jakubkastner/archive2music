@@ -657,6 +657,7 @@ namespace alba
             {
                 string nazevSlozky = new DirectoryInfo(slozkaSeznam).Name;
                 seznamSlozekNazvy.Add(nazevSlozky);
+                pocetSlozek++;
             }
             ZobrazStavPosledni("bylo načteno " + pocetSlozek + " složek hudební knihovny", true);
             return seznamSlozekNazvy;
