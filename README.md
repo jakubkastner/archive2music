@@ -6,6 +6,10 @@ This program is only in the Czech language!
 ## O programu
 Program archive2music slouží k organizaci hudebních alb načtených buďto z archivu (zip, rar apod.) nebo přímo ze složky.
 
+## Stažení programu
+Program je volně ke stažení na této adrese:  
+https://github.com/jakubkastner/archive2music/raw/master/archive2music_installer/Debug/archive2music_installer.msi
+
 ## Funkce programu
 
 ## Jak pracovat s programem
