@@ -450,6 +450,8 @@ namespace alba
             label19.Visible = false;
             label22.Visible = false;
 
+            labelPridaniUpravaArchivu_Stav.Visible = false;
+
             // nastavím index upravovaného archivu
             indexArchivu = 0;
 
@@ -547,6 +549,9 @@ namespace alba
             buttonZobrazeniArchivu_Mp3TagMp3.Enabled = false;
             buttonZobrazeniArchivu_Mp3TagVse.Enabled = false;
             buttonZobrazeniArchivu_PrevestNaMp3.Enabled = false;
+            buttonZobrazeniArchivu_OtevritPruzkumnikOpus.Enabled = false;
+            buttonZobrazeniArchivu_OtevritPruzkumnikMp3.Enabled = false;
+            buttonZobrazeniArchivu_OtevritPruzkumnikVse.Enabled = false;
 
 
             // -> nastavení
@@ -591,9 +596,10 @@ namespace alba
             List<string> zanrySlozky = new List<string>();
             List<string> zanrySlozkyMp3 = NactiSlozkyStart(comboBoxNastaveni_SlozkaMp3.Text, labelNastaveni_SlozkaMp3Stav);
             List<string> zanrySlozkyOpus = NactiSlozkyStart(comboBoxNastaveni_SlozkaOpus.Text, labelNastaveni_SlozkaOpusStav);
+            zanrySlozky.Add("");
             if (zanrySlozkyMp3 != null)
             {
-                zanrySlozky = zanrySlozkyMp3;
+                zanrySlozky.AddRange(zanrySlozkyMp3);
             }
             if (zanrySlozkyOpus != null)
             {
@@ -2271,6 +2277,9 @@ namespace alba
                 buttonZobrazeniArchivu_Mp3TagMp3.Enabled = true;
                 buttonZobrazeniArchivu_Mp3TagVse.Enabled = true;
                 buttonZobrazeniArchivu_PrevestNaMp3.Enabled = true;
+                buttonZobrazeniArchivu_OtevritPruzkumnikOpus.Enabled = true;
+                buttonZobrazeniArchivu_OtevritPruzkumnikMp3.Enabled = true;
+                buttonZobrazeniArchivu_OtevritPruzkumnikVse.Enabled = true;
             }
             else
             {
@@ -2286,6 +2295,9 @@ namespace alba
                 buttonZobrazeniArchivu_Mp3TagMp3.Enabled = false;
                 buttonZobrazeniArchivu_Mp3TagVse.Enabled = false;
                 buttonZobrazeniArchivu_PrevestNaMp3.Enabled = false;
+                buttonZobrazeniArchivu_OtevritPruzkumnikOpus.Enabled = false;
+                buttonZobrazeniArchivu_OtevritPruzkumnikMp3.Enabled = false;
+                buttonZobrazeniArchivu_OtevritPruzkumnikVse.Enabled = false;
             }
             labelZobrazeniArchivu_VybraneArchivy.Text += " z " + listViewZobrazeniArchivu_SeznamArchivu.Items.Count;
             if (listViewZobrazeniArchivu_SeznamArchivu.Items.Count <= 0)
@@ -2462,21 +2474,140 @@ namespace alba
 
         private void buttonZobrazeniArchivu_Mp3TagRozbalene_Click(object sender, EventArgs e)
         {
-            SpustitMp3Tag(false, false);
+            SpustitMp3Tag("zip");
+            //SpustitMp3Tag(false, false);
         }
         private void buttonZobrazeniArchivu_Mp3TagMp3_Click(object sender, EventArgs e)
         {
-            SpustitMp3Tag(false, true);
+            SpustitMp3Tag("mp3");
+            //SpustitMp3Tag(false, true);
         }
         private void buttonZobrazeniArchivu_Mp3TagOpus_Click(object sender, EventArgs e)
         {
-            SpustitMp3Tag(true, false);
+            SpustitMp3Tag("opus");
+            //SpustitMp3Tag(true, false);
         }
         private void buttonZobrazeniArchivu_Mp3TagVse_Click(object sender, EventArgs e)
         {
-            SpustitMp3Tag(true, false);
-            SpustitMp3Tag(false, true);
+            SpustitMp3Tag("mp3");
+            SpustitMp3Tag("opus");
+            /*SpustitMp3Tag(true, false);
+            SpustitMp3Tag(false, true);*/
         }
+        private void SpustitMp3Tag(string typ)
+        {
+            string cestaMp3tagu = comboBoxNastaveni_Mp3Tag.Text;
+            // spustí mp3tag
+            // typ
+            // -> opus
+            // -> mp3
+            // -> zip
+            ZobrazStavNovy("otevření souborů " + typ + " v mp3tagu", false);
+
+            // zkontroluje cestu programu na rozbalení souborů
+            ZkontrolujSoubor(cestaMp3tagu, ".exe", labelNastaveni_Mp3TagStav);
+            if (!ZkontrolujPredSpoustenim(labelNastaveni_Mp3TagStav.Text, true))
+            {
+                // je chybná cesta programu
+                // -> ukončí otevření
+                ZobrazStavPosledni("nepodařilo se spustit mp3tag", false);
+                ZobrazChybu(labelNastaveni_RozbaleniStav.Text, "Otevření Mp3tagu");
+                return;
+            }
+
+            // projde archivy
+            foreach (ListViewItem archivKOtevreni in listViewZobrazeniArchivu_SeznamArchivu.CheckedItems)
+            {
+                if (archivKOtevreni.SubItems[1].Text == "0" || archivKOtevreni.SubItems[1].Text == "-1")
+                {
+                    // stav archivu je 0 nebo -1
+                    // tz. není vyplněna složka a další info o archivu
+                    ZobrazStavPosledni("nepodařilo se otevřít soubory v mp3tagu, doplňte informace o archivu (interpret, album, rok a hudební složky)", false);
+                    continue;
+                }
+                if (archivKOtevreni.SubItems[1].Text == "1")
+                {
+                    // stav je 1, archiv nebyl rozbalen
+                    ZobrazStavPosledni("nepodařilo se otevřít soubory v mp3tagu, rozbalte archiv", false);
+                    continue;
+                }
+
+                string cesta = ZiskejCestu(archivKOtevreni, typ);
+                if (String.IsNullOrEmpty(cesta))
+                {
+                    continue;
+                }
+                if (Directory.Exists(cesta))
+                {
+                    SpustitProgram(cestaMp3tagu, "/fp:\"" + cesta + "\"", false);
+                }
+                else
+                {
+                    ZobrazStavPosledni("Složka daného archivu neexistuje (" + cesta + ")", false);
+                }
+            }
+        }
+
+        // získá cestu souborů archivu k otevření v mp3tag
+        private string ZiskejCestu(ListViewItem archiv, string typ)
+        {
+            string stav = archiv.SubItems[1].Text;
+            string cesta = Path.Combine(Directory.GetCurrentDirectory(), slozkaProgramuCache, archiv.SubItems[0].Text);
+            // opus
+            if (typ == "zip")
+            {
+                cesta = Path.Combine(cesta, typ);
+                return cesta;
+            }
+            if (stav == "5")
+            {
+                // převedené soubory = 5
+                cesta = Path.Combine(cesta, typ);
+                return cesta;
+            }
+            if (stav == "-2" || stav == "2")
+            {
+                // rozbalené soubory = -2,2
+                ZobrazStavPosledni("nepodařilo se otevřít soubory v mp3tagu, převeďte je nejdříve na formát " + typ, false);
+                return null;
+            }
+            if (typ == "opus")
+            {
+                if (stav == "4" || stav == "8")
+                {
+                    // rozbalené soubory = -2,2,4,8
+                    ZobrazStavPosledni("nepodařilo se otevřít soubory v mp3tagu, převeďte je nejdříve na formát " + typ, false);
+                    return null;
+                }
+                if (stav == "3"|| stav == "9")
+                {
+                    // převedené soubory = 3,5,9
+                    cesta = Path.Combine(cesta, typ);
+                    return cesta;
+                }
+                // přesunuté soubory = 6,8,10
+                cesta = archiv.SubItems[7].Text;
+                return cesta;
+            }
+
+            // mp3
+            if (stav == "3" || stav == "7")
+            {
+                // rozbalené soubory = -2,2,3,7
+                ZobrazStavPosledni("nepodařilo se otevřít soubory v mp3tagu, převeďte je nejdříve na formát " + typ, false);
+                return null;
+            }
+            if (stav == "4" || stav == "10")
+            {
+                // převedené soubory = 4,5,10
+                cesta = Path.Combine(cesta, typ);
+                return cesta;
+            }
+            // přesunuté soubory = 6,7,9
+            cesta = archiv.SubItems[8].Text;
+            return cesta;
+        }
+
         private void SpustitMp3Tag(bool opus, bool mp3)
         {
             string cestaMp3tagu = comboBoxNastaveni_Mp3Tag.Text;
@@ -2828,7 +2959,7 @@ namespace alba
                 prevadec.ReportProgress(1, "převádím archiv " + nazevArchivu + " na " + typSouboru);
 
                 // 1. kontrola stavu archivu
-                if (archivKPrevodu.SubItems[1].Text == "0")
+                if (archivKPrevodu.SubItems[1].Text == "0" || archivKPrevodu.SubItems[1].Text == "-1")
                 {
                     // stav archivu je 0
                     // tz. není vyplněna složka a další info o archivu
@@ -2841,9 +2972,9 @@ namespace alba
                     prevadec.ReportProgress(0, "archiv " + nazevArchivu + " se nepodařilo převést na " + typSouboru + ", rozbalte archiv");
                     continue;
                 }
-                if (archivKPrevodu.SubItems[1].Text == "5" ||
-                    (typSouboru == "opus" && archivKPrevodu.SubItems[1].Text == "3") ||
-                    (typSouboru == "mp3" && archivKPrevodu.SubItems[1].Text == "4"))
+                if (archivKPrevodu.SubItems[1].Text == "5" || archivKPrevodu.SubItems[1].Text == "6" || archivKPrevodu.SubItems[1].Text == "9" || archivKPrevodu.SubItems[1].Text == "10" ||
+                    (typSouboru == "opus" && (archivKPrevodu.SubItems[1].Text == "3" || archivKPrevodu.SubItems[1].Text == "7")) ||
+                    (typSouboru == "mp3" && (archivKPrevodu.SubItems[1].Text == "4" || archivKPrevodu.SubItems[1].Text == "8")))
                 {
                     // stav je 1, archiv nebyl rozbalen
                     prevadec.ReportProgress(0, "archiv " + nazevArchivu + " již byl převeden dříve na " + typSouboru);
@@ -3012,6 +3143,14 @@ namespace alba
                             archivKPrevodu.SubItems[1].Text = "4";
                         }
                     }
+                    else if (typSouboru == "mp3" && archivKPrevodu.SubItems[1].Text == "7")
+                    {
+                        archivKPrevodu.SubItems[1].Text = "10";
+                    }
+                    else if (typSouboru == "opus" && archivKPrevodu.SubItems[1].Text == "8")
+                    {
+                        archivKPrevodu.SubItems[1].Text = "9";
+                    }
                 }));
                 
             }
@@ -3028,7 +3167,7 @@ namespace alba
                 buttonZobrazeniArchivu_PresunDoKnihoven.Enabled = false;
                 return;
             }
-            ZobrazStavNovy("převos souborů do knihoven", false);
+            ZobrazStavNovy("přesun souborů do knihoven", false);
             buttonZobrazeniArchivu_PresunDoKnihoven.Text = "Zrušit přesun do knihoven";
 
             if (!backgroundWorkerPresunDoKnihoven.IsBusy)
@@ -3064,6 +3203,8 @@ namespace alba
                     e.Cancel = true;
                     return;
                 }
+                string nazevArchivu = archiv.SubItems[0].Text;
+                backgroundWorkerPresunDoKnihoven.ReportProgress(1, "přesunuji archiv " + nazevArchivu);
                 // 0 název, 1 stav, 2 heslo (někdy skryté), 3 interpret, 4 rok, 5 album, 6 žánr, 7 složka opus, 8 složka mp3, 9 cover
                 // tag = heslo, tooltiptext = cesta
 
@@ -3072,41 +3213,103 @@ namespace alba
                 {
                     // stav archivu je 0
                     // tz. není vyplněna složka a další info o archivu
-                    backgroundWorkerPresunDoKnihoven.ReportProgress(0, "rozbalené soubory z archivu se nepodařilo přesunout, doplňte informace o archivu (interpret, album, rok a hudební složky)");
+                    backgroundWorkerPresunDoKnihoven.ReportProgress(0, "rozbalené soubory z archivu '" + nazevArchivu + "' se nepodařilo přesunout, doplňte informace o archivu (interpret, album, rok a hudební složky)");
                     continue;
                 }
                 if (archiv.SubItems[1].Text == "1")
                 {
                     // stav je 1, archiv nebyl rozbalen
-                    backgroundWorkerPresunDoKnihoven.ReportProgress(0, "rozbalené soubory z archivu se nepodařilo přesunout, rozbalte archiv");
+                    backgroundWorkerPresunDoKnihoven.ReportProgress(0, "rozbalené soubory z archivu '" + nazevArchivu + "' se nepodařilo přesunout, rozbalte archiv");
                     continue;
                 }
-                if (archiv.SubItems[1].Text == "2" ||
+                if (archiv.SubItems[1].Text == "2"/* ||
                     archiv.SubItems[1].Text == "3" ||
-                    archiv.SubItems[1].Text == "4")
+                    archiv.SubItems[1].Text == "4"*/)
                 {
-                    // stav je 1, archiv nebyl rozbalen
-                    backgroundWorkerPresunDoKnihoven.ReportProgress(0, "rozbalené soubory z archivu se nepodařilo přesunout, převeďte je na opus i mp3");
+                    // stav je 2, soubory nebyly převedeny
+                    // 4 = mp3, 3 = opus
+                    backgroundWorkerPresunDoKnihoven.ReportProgress(0, "rozbalené soubory z archivu '" + nazevArchivu + "' se nepodařilo přesunout, převeďte je na opus i mp3");
                     continue;
                 }
 
-                string nazevArchivu = archiv.SubItems[0].Text;
                 string slozkaOpus = archiv.SubItems[7].Text;
                 string slozkaMp3 = archiv.SubItems[8].Text;
                 string cover = Path.Combine(slozkaProgramuCache, nazevArchivu, archiv.SubItems[9].Text);
-                if (!PresunDoSlozky("opus", nazevArchivu, slozkaOpus, cover))
+                if (archiv.SubItems[1].Text == "3")
                 {
-                    return;
+                    if (!PresunDoSlozky("opus", nazevArchivu, slozkaOpus, cover))
+                    {
+                        backgroundWorkerPresunDoKnihoven.ReportProgress(0, "rozbalené soubory z archivu '" + nazevArchivu + "' se nepodařilo přesunout, převeďte je na opus");
+                        continue;
+                    }
+                    listViewZobrazeniArchivu_SeznamArchivu.Invoke(new Action(() =>
+                    {
+                        // uložení stavu = převedeno pouze na opus
+                        archiv.SubItems[1].Text = "7";
+                    }));
                 }
-                if (!PresunDoSlozky("mp3", nazevArchivu, slozkaMp3, cover))
+                else if (archiv.SubItems[1].Text == "9")
                 {
-                    return;
+                    if (!PresunDoSlozky("opus", nazevArchivu, slozkaOpus, cover))
+                    {
+                        backgroundWorkerPresunDoKnihoven.ReportProgress(0, "rozbalené soubory z archivu '" + nazevArchivu + "' se nepodařilo přesunout, převeďte je na opus");
+                        continue;
+                    }
+                    listViewZobrazeniArchivu_SeznamArchivu.Invoke(new Action(() =>
+                    {
+                        // uložení stavu = převedeno na opus i mp3
+                        archiv.SubItems[1].Text = "6";
+                    }));
                 }
-                listViewZobrazeniArchivu_SeznamArchivu.Invoke(new Action(() =>
+                else if (archiv.SubItems[1].Text == "4" || archiv.SubItems[1].Text == "10")
                 {
-                    // uložení stavu
-                    archiv.SubItems[1].Text = "6";
-                }));
+                    if (!PresunDoSlozky("mp3", nazevArchivu, slozkaMp3, cover))
+                    {
+                        backgroundWorkerPresunDoKnihoven.ReportProgress(0, "rozbalené soubory z archivu '" + nazevArchivu + "' se nepodařilo přesunout, převeďte je na mp3");
+                        continue;
+                    }
+                    listViewZobrazeniArchivu_SeznamArchivu.Invoke(new Action(() =>
+                    {
+                        // uložení stavu = převedno pouze na mp3
+                        archiv.SubItems[1].Text = "8";
+                    }));
+                }
+                else if (archiv.SubItems[1].Text == "10")
+                {
+                    if (!PresunDoSlozky("mp3", nazevArchivu, slozkaMp3, cover))
+                    {
+                        backgroundWorkerPresunDoKnihoven.ReportProgress(0, "rozbalené soubory z archivu '" + nazevArchivu + "' se nepodařilo přesunout, převeďte je na mp3");
+                        continue;
+                    }
+                    listViewZobrazeniArchivu_SeznamArchivu.Invoke(new Action(() =>
+                    {
+                        // uložení stavu = převedno na mp3 i opus
+                        archiv.SubItems[1].Text = "6";
+                    }));
+                }
+                else if (archiv.SubItems[1].Text == "5")
+                {
+                    if (!PresunDoSlozky("opus", nazevArchivu, slozkaOpus, cover))
+                    {
+                        backgroundWorkerPresunDoKnihoven.ReportProgress(0, "rozbalené soubory z archivu '" + nazevArchivu + "' se nepodařilo přesunout, převeďte je na opus");
+                        continue;
+                    }
+                    if (!PresunDoSlozky("mp3", nazevArchivu, slozkaMp3, cover))
+                    {
+                        backgroundWorkerPresunDoKnihoven.ReportProgress(0, "rozbalené soubory z archivu '" + nazevArchivu + "' se nepodařilo přesunout, převeďte je na mp3");
+                        continue;
+                    }
+                    listViewZobrazeniArchivu_SeznamArchivu.Invoke(new Action(() =>
+                    {
+                        // uložení stavu = převedeno na opus i mp3
+                        archiv.SubItems[1].Text = "6";
+                    }));
+                }
+                else
+                {
+                    backgroundWorkerPresunDoKnihoven.ReportProgress(0, "rozbalené soubory z archivu '" + nazevArchivu + "' se nepodařilo přesunout, už byly přesunuty dříve");
+                    continue;
+                }
             }
         }
 
@@ -3219,6 +3422,10 @@ namespace alba
                 buttonZobrazeniArchivu_PresunDoKnihoven.Enabled = true;
             }
             else if (e.Error != null)
+            {
+                ZobrazStavPosledni("přesun souborů se nezdařil", false);
+            }
+            else if ((string)e.Result == "0")
             {
                 ZobrazStavPosledni("přesun souborů se nezdařil", false);
             }
@@ -3501,20 +3708,78 @@ namespace alba
             }
             ZobrazStavPosledni("cache bylo úspěšně vymazáno", true);
         }
+
+        private void buttonZobrazeniArchivu_OtevritPruzkumnikOpus_Click(object sender, EventArgs e)
+        {
+            OtevritVPruzkumniku(true);
+        }
+
+        private void buttonZobrazeniArchivu_OtevritPruzkumnikMp3_Click(object sender, EventArgs e)
+        {
+            OtevritVPruzkumniku(false);
+        }
+
+        private void buttonZobrazeniArchivu_OtevritPruzkumnikVse_Click(object sender, EventArgs e)
+        {
+            OtevritVPruzkumniku(true);
+            OtevritVPruzkumniku(false);
+        }
+
+        private void OtevritVPruzkumniku(bool opus)
+        {
+            if (opus)
+            {
+                ZobrazStavNovy("otevření převedených opus souborů v průzkumníku", false);
+            }
+            else
+            {
+                ZobrazStavNovy("otevření převedených mp3 souborů v průzkumníku", false);
+            }
+
+            // projde archivy
+            foreach (ListViewItem archivKOtevreni in listViewZobrazeniArchivu_SeznamArchivu.CheckedItems)
+            {
+                string stav = archivKOtevreni.SubItems[1].Text;
+                string nazev = archivKOtevreni.SubItems[1].Text;
+                ZobrazStavPrubezny("Otevírání archivu '" + nazev + "' v průzkumníku");
+                // opus
+                if (opus)
+                {
+                    if (stav != "7" || stav != "6")
+                    {
+                        ZobrazStavPosledni("Archiv '" + nazev + "' nemohl být otevřen v průzkumníku, převeďte soubory do knihovny", false);
+                        continue;
+                    }
+                    SpustitProgram(archivKOtevreni.SubItems[7].Text, "", false);
+                    continue;
+                }
+                // mp3
+                if (stav != "8" || stav != "6")
+                {
+                    ZobrazStavPosledni("Archiv '" + nazev + "' nemohl být otevřen v průzkumníku, převeďte soubory do knihovny", false);
+                    continue;
+                }
+                SpustitProgram(archivKOtevreni.SubItems[8].Text, "", false);
+            }
+        }
     }
 }
 
 /*
-
+    -2 = vyplněny informace k albu u složky
+    -1 = přidána složka složka již přidaná (není potřeba rozbalit)
     0 = přidán archiv
-    1 = vyplněna složka (interpret, album, rok)
+    1 = vyplněna informace k albu u archivu (interpret, album, rok)
     2 = archiv rozbalen
-    3 = převedeno na mp3
-    4 = převedeno na opus
-    5 = 1 + 2 + 3 + 4
-    6 = přesunuto do knihovny
-    
-    nový -1 = složka již přidaná (není potřeba rozbalit)
+    3 = převedeno na opus
+    4 = převedeno na mp3
+    5 = 1 + 2 + 3 + 4 (převedeno na opus i mp3)
+    6 = přesunuto do knihovny (opus i mp3) = konec
+    7 = opus přesunuto do knihovny
+    8 = mp3 přesunuto do knihovny
+    9 = 3 + 8 (převedeno na opus a mp3 přesunuto do knihovny)
+    10 = 4 + 7 (převedeno na mp3 a opus přesunuto do knihovny)
+
 
     musí být splněno
     -> 0
@@ -3532,7 +3797,13 @@ namespace alba
     1 + 2 + 3 + 4 -> 5
     5 (=1+2+3+4) -> 6
 
-    staré*****
+
+
+
+
+
+
+    *****staré*****
     1 = vyplněna složka (interpret, album, rok)
       -> připraveno k rozbalení
 

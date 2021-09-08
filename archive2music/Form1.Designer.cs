@@ -182,6 +182,9 @@
             this.buttonZobrazeniArchivu_Mp3TagRozbalene = new System.Windows.Forms.Button();
             this.label49 = new System.Windows.Forms.Label();
             this.backgroundWorkerPresunDoKnihoven = new System.ComponentModel.BackgroundWorker();
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus = new System.Windows.Forms.Button();
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3 = new System.Windows.Forms.Button();
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPridaniUpravaArchivu_Rok)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPridaniUpravaArchivu_Cover)).BeginInit();
             this.panelPridaniUpravaArchivu.SuspendLayout();
@@ -878,7 +881,7 @@
             this.buttonZobrazeniArchivu_SpustitVse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
             this.buttonZobrazeniArchivu_SpustitVse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonZobrazeniArchivu_SpustitVse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
-            this.buttonZobrazeniArchivu_SpustitVse.Location = new System.Drawing.Point(847, 536);
+            this.buttonZobrazeniArchivu_SpustitVse.Location = new System.Drawing.Point(122, 563);
             this.buttonZobrazeniArchivu_SpustitVse.Name = "buttonZobrazeniArchivu_SpustitVse";
             this.buttonZobrazeniArchivu_SpustitVse.Size = new System.Drawing.Size(139, 23);
             this.buttonZobrazeniArchivu_SpustitVse.TabIndex = 51;
@@ -2042,6 +2045,9 @@
             // 
             this.panelZobrazeniArchivu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelZobrazeniArchivu.Controls.Add(this.buttonZobrazeniArchivu_OtevritPruzkumnikVse);
+            this.panelZobrazeniArchivu.Controls.Add(this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3);
+            this.panelZobrazeniArchivu.Controls.Add(this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus);
             this.panelZobrazeniArchivu.Controls.Add(this.labelZobrazeniArchivu_VybraneArchivy);
             this.panelZobrazeniArchivu.Controls.Add(this.labelZobrazeniArchivu_Kontrola);
             this.panelZobrazeniArchivu.Controls.Add(this.buttonZobrazeniArchivu_PrevestNaMp3);
@@ -2281,6 +2287,57 @@
             this.backgroundWorkerPresunDoKnihoven.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerPresunDoKnihoven_ProgressChanged);
             this.backgroundWorkerPresunDoKnihoven.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerPresunDoKnihoven_RunWorkerCompleted);
             // 
+            // buttonZobrazeniArchivu_OtevritPruzkumnikOpus
+            // 
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus.FlatAppearance.BorderSize = 0;
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus.Location = new System.Drawing.Point(847, 536);
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus.Name = "buttonZobrazeniArchivu_OtevritPruzkumnikOpus";
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus.Size = new System.Drawing.Size(153, 23);
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus.TabIndex = 59;
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus.Text = "Otevřít opus v průzkumníku";
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus.UseVisualStyleBackColor = false;
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus.Click += new System.EventHandler(this.buttonZobrazeniArchivu_OtevritPruzkumnikOpus_Click);
+            // 
+            // buttonZobrazeniArchivu_OtevritPruzkumnikMp3
+            // 
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3.FlatAppearance.BorderSize = 0;
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3.Location = new System.Drawing.Point(847, 564);
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3.Name = "buttonZobrazeniArchivu_OtevritPruzkumnikMp3";
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3.Size = new System.Drawing.Size(153, 23);
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3.TabIndex = 59;
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3.Text = "Otevřít mp3 v průzkumníku";
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3.UseVisualStyleBackColor = false;
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3.Click += new System.EventHandler(this.buttonZobrazeniArchivu_OtevritPruzkumnikMp3_Click);
+            // 
+            // buttonZobrazeniArchivu_OtevritPruzkumnikVse
+            // 
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse.FlatAppearance.BorderSize = 0;
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(225)))));
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse.Location = new System.Drawing.Point(847, 592);
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse.Name = "buttonZobrazeniArchivu_OtevritPruzkumnikVse";
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse.Size = new System.Drawing.Size(153, 23);
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse.TabIndex = 59;
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse.Text = "Otevřít vše v průzkumníku";
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse.UseVisualStyleBackColor = false;
+            this.buttonZobrazeniArchivu_OtevritPruzkumnikVse.Click += new System.EventHandler(this.buttonZobrazeniArchivu_OtevritPruzkumnikVse_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2470,6 +2527,9 @@
         private System.Windows.Forms.Label labelNastaveni_CacheSlozka;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Button buttonZobrazeniArchivu_OtevritPruzkumnikVse;
+        private System.Windows.Forms.Button buttonZobrazeniArchivu_OtevritPruzkumnikMp3;
+        private System.Windows.Forms.Button buttonZobrazeniArchivu_OtevritPruzkumnikOpus;
     }
 }
 
