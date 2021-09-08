@@ -1897,6 +1897,66 @@ namespace alba
                     {
                         // jedná se o složku (typ == složka)
                         stav = "-1";
+
+                        ZobrazStavPrubezny("přesunuji složku '" + archivZeSeznamu.SubItems[0].Text + "'");
+                        // získá cílovou složku rozbalení archivu
+                        string cilovaSlozka = Path.Combine(slozkaProgramuCache, archivZeSeznamu.SubItems[0].Text, "zip");
+                        try
+                        {
+                            // vytvoří složku archivu ve složce "cache"
+                            if (Directory.Exists(cilovaSlozka))
+                            {
+                                // pokud již existuje
+                                // -> smažu ji
+                                Directory.Delete(cilovaSlozka, true);
+                            }
+                            Directory.CreateDirectory(cilovaSlozka);
+                        }
+                        catch (Exception ex)
+                        {
+                            ZobrazStavPosledni("složka '" + archivZeSeznamu.SubItems[0].Text + "' se nepodařilo přesunout", false);
+                            ZobrazChybu(ex.Message, "Přesunutí složky");
+                            continue;
+                        }
+
+                        string[] souborySlozka = Directory.GetFiles(archivZeSeznamu.SubItems[3].Text, "*.*", SearchOption.AllDirectories);
+
+                        if (souborySlozka.Count() > 0)
+                        {
+                            // nalezené soubory mp3/opus nakopíruje do složky "mp3/opus"
+                            // přesunu do složky mp3/opus
+
+                            // zkopíruje soubory ze složky ("cesta") do složky dle typu (mp3 / opus)
+                            int pocetPresunutych = 0;
+
+                            foreach (string souborZeSlozky in souborySlozka)
+                            {
+                                string souborKoncovka = Path.GetExtension(souborZeSlozky);
+                                if (souborKoncovka == ".mp3" || souborKoncovka == ".opus" || souborKoncovka == ".wma" || souborKoncovka == ".ogg" ||
+                                    souborKoncovka == ".flac" || souborKoncovka == ".mpc" || souborKoncovka == ".acc" || souborKoncovka == ".alac" ||
+                                    souborKoncovka == ".tak" || souborKoncovka == ".wma" || souborKoncovka == ".wavpack" || souborKoncovka == ".wav" ||
+                                    souborKoncovka == ".m4a" || souborKoncovka == ".aiff")
+                                {
+                                    // projdu soubory a zkopíruju
+                                    ZobrazStavPrubezny("přesunuji soubor '" + souborZeSlozky + "'");
+                                    try
+                                    {
+                                        File.Copy(souborZeSlozky, Path.Combine(cilovaSlozka, Path.GetFileName(souborZeSlozky)));
+                                        //ZobrazStavPosledni("Soubor " + souborZeSlozky + " byl přesunut do složky " + cilovaSlozka, true);
+                                        pocetPresunutych++;
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        ZobrazStavPosledni("Soubor " + souborZeSlozky + " se nepodařilo přesunout", false);
+                                        ZobrazChybu(ex.Message, "Přesunování souboru");
+                                        continue;
+                                    }
+                                }
+                            }
+
+                            ZobrazStavPosledni("Bylo přesunuto " + pocetPresunutych + " hudebních souborů (z " + souborySlozka.Count() + " nalezených souborů)", true);
+                        }
+
                     }
                     ListViewItem novyArchiv = new ListViewItem(new string[] { archivZeSeznamu.SubItems[0].Text, stav, "", "", "", "", "", "", "", "" });
                     novyArchiv.ToolTipText = archivZeSeznamu.SubItems[3].Text; // cesta
@@ -3129,7 +3189,7 @@ namespace alba
                         archivKPrevodu.SubItems[1].Text = "5";
                         // nyní je převeden na oboje
                     }
-                    else if (archivKPrevodu.SubItems[1].Text == "2")
+                    else if (archivKPrevodu.SubItems[1].Text == "2" || archivKPrevodu.SubItems[1].Text == "-2")
                     {
                         // archiv byl dříve rozbalen
                         if (typSouboru == "opus")
@@ -3740,26 +3800,26 @@ namespace alba
             foreach (ListViewItem archivKOtevreni in listViewZobrazeniArchivu_SeznamArchivu.CheckedItems)
             {
                 string stav = archivKOtevreni.SubItems[1].Text;
-                string nazev = archivKOtevreni.SubItems[1].Text;
+                string nazev = archivKOtevreni.SubItems[0].Text;
                 ZobrazStavPrubezny("Otevírání archivu '" + nazev + "' v průzkumníku");
                 // opus
                 if (opus)
                 {
-                    if (stav != "7" || stav != "6")
+                    if (stav == "7" || stav == "6")
                     {
-                        ZobrazStavPosledni("Archiv '" + nazev + "' nemohl být otevřen v průzkumníku, převeďte soubory do knihovny", false);
+                        SpustitProgram(archivKOtevreni.SubItems[7].Text, "", false);
                         continue;
                     }
-                    SpustitProgram(archivKOtevreni.SubItems[7].Text, "", false);
-                    continue;
-                }
-                // mp3
-                if (stav != "8" || stav != "6")
-                {
                     ZobrazStavPosledni("Archiv '" + nazev + "' nemohl být otevřen v průzkumníku, převeďte soubory do knihovny", false);
                     continue;
                 }
-                SpustitProgram(archivKOtevreni.SubItems[8].Text, "", false);
+                // mp3
+                if (stav == "8" || stav == "6")
+                {
+                    SpustitProgram(archivKOtevreni.SubItems[8].Text, "", false);
+                    continue;
+                }
+                ZobrazStavPosledni("Archiv '" + nazev + "' nemohl být otevřen v průzkumníku, převeďte soubory do knihovny", false);
             }
         }
     }
