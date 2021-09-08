@@ -12,20 +12,20 @@ Program archive2music slouží k organizaci hudebních alb načtených buďto z 
 1. Načtení složky a zobrazení archivů ve složce
 2. Přidání archivů (zip, rar apod.) nebo složek hudebních alb k následné úpravě.
 3. Přidání informací k albu
-  1. Interpret
-  2. Název alba
-  3. Rok vydání alba
-  4. Žánr alba
-  5. Upřesnění složek
-  6. Cover alba  
+   1. Interpret
+   2. Název alba
+   3. Rok vydání alba
+   4. Žánr alba
+   5. Upřesnění složek
+   6. Cover alba  
   vlastní - ze souboru  
   nebo získaný pomocí programu album art downloader, případně pomocí deezer albums search
 4. Operace s albumy
-  1. Rozbalení souboru s archivem (tento bod odpadá, pokud přidáme složku místo archivu)
-  2. Otevření rozbalených souborů v mp3tag a jejich následná úprava pomocí tagů a apod. díky jednoduché funkci
-  3. Převedení na formát mp3 nebo opus pomocí ffmpeg
-  4. Případné otevření převedených souborů v programu mp3tag
-  5. Přesunutí převedených alb do hudebních knihoven
+   1. Rozbalení souboru s archivem (tento bod odpadá, pokud přidáme složku místo archivu)
+   2. Otevření rozbalených souborů v mp3tag a jejich následná úprava pomocí tagů a apod. díky jednoduché funkci
+   3. Převedení na formát mp3 nebo opus pomocí ffmpeg
+   4. Případné otevření převedených souborů v programu mp3tag
+   5. Přesunutí převedených alb do hudebních knihoven
 
 ## Potřebné programy pro funkčnost youtube2music
 * ffmpeg
