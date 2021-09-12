@@ -6,6 +6,18 @@ This program is only in the Czech language!
 __Upozornění:__
 Program byl primárně vytvořen pro moje osobní použití. Aktuálně existují [omezení](#aktuální-omezení-programu), která budou možná v budoucích verzích odstraněna.
 
+1. [O programu](#o-programu)
+2. [Stažení programu](#stažení-programu)
+3. [Funkce programu](#funkce-programu)
+4. [Jak pracovat s programem](#jak-pracovat-s-programem)
+5. [Potřebné programy pro funkčnost archive2music](#potřebné-programy-pro-funkčnost-archive2music)
+6. [Volitelné programy](#volitelné-programy)
+7. [Integrace s mp3tag](#integrace-s-mp3tag)
+   1. [Nastavení integrace](#nastavení-integrace)
+   2. [Použití integrace](#použití-integrace)
+   3. [Úprava akce archive2music](#úprava-akce-archive2music)
+9. [Aktuální omezení programu](#aktuální-omezení-programu)
+
 ## O programu
 Program archive2music slouží k organizaci hudebních alb načtených buďto z archivu (zip, rar apod.) nebo přímo ze složky.
 
