@@ -13,32 +13,32 @@ Program je volně ke stažení na této adrese:
 ## Funkce programu
 
 ## Jak pracovat s programem
-1. Načtení složky a zobrazení archivů ve složce
-<img src="screenshots/archive2music_add-album.gif" alt="add album">
-3. Přidání archivů (zip, rar apod.) nebo složek hudebních alb k následnému doplnění informací o albu.
-4. Doplnění informací k albu
+1. Načtení složky a zobrazení archivů ve složce  
+   <img src="screenshots/archive2music_add-album.gif" alt="add album">
+2. Přidání archivů (zip, rar apod.) nebo složek hudebních alb k následnému doplnění informací o albu.
+3. Doplnění informací k albu
    1. Interpret
    2. Název alba
    3. Rok vydání alba
    4. Žánr alba
    5. Upřesnění složek
    6. Cover alba  
-  vlastní - ze souboru  
-  nebo získaný pomocí programu album art downloader, případně pomocí deezer albums search
-<img src="screenshots/archive2music_change-info.gif" alt="change info">
-4. Operace s albumy
+   vlastní - ze souboru  
+   nebo získaný pomocí programu album art downloader, případně pomocí deezer albums search  
+   <img src="screenshots/archive2music_change-info.gif" alt="change info">
+4. Operace s albumy  
    1. Rozbalení souboru s archivem (tento bod odpadá, pokud přidáme složku místo archivu)
    2. Otevření rozbalených souborů v mp3tag a jejich následná úprava pomocí tagů a apod. díky jednoduché funkci
    3. Převedení na formát mp3 nebo opus pomocí ffmpeg
    4. Případné otevření převedených souborů v programu mp3tag
-   5. Přesunutí převedených alb do hudebních knihoven
-<img src="screenshots/archive2music_manage-abums.gif" alt="manage albums">
+   5. Přesunutí převedených alb do hudebních knihoven  
+   <img src="screenshots/archive2music_manage-abums.gif" alt="manage albums">
 
 ## Potřebné programy pro funkčnost archive2music
 Tyto programy je nutné nainstalovat a v nastavenení programu archive2music nastavit cestu ke spustitelnému exe souboru.
 * [ffmpeg](https://www.ffmpeg.org/)
-* [WinRAR](https://www.rarlab.com/)
-* <img src="screenshots/archive2music_settings.png" alt="settings">
+* [WinRAR](https://www.rarlab.com/)  
+<img src="screenshots/archive2music_settings.png" alt="settings">
 
 ## Volitelné programy
 Tyto programy je možné nainstalovat a v nastavenení programu archive2music nastavit cestu ke spustitelnému exe souboru. Slouží k následnému usnandění práce s alby (získání coveru alba nebo otagování hudebních souborů).
