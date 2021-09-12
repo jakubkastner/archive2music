@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_5962B4CC638936E6CBBCE91D0BDEE180"
+        "OwnerKey" = "8:_E322435CDF6E48B2A3F50E8B3A73617F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_9CB9A1E59F805507D42798686AD45F83"
         "OwnerKey" = "8:_E322435CDF6E48B2A3F50E8B3A73617F"
         "MsmSig" = "8:_UNDEFINED"
@@ -33,12 +39,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E8DC56E4DC65E7088822D29505522DE5"
-        "OwnerKey" = "8:_E322435CDF6E48B2A3F50E8B3A73617F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_E322435CDF6E48B2A3F50E8B3A73617F"
         "MsmSig" = "8:_UNDEFINED"
@@ -46,7 +46,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E8DC56E4DC65E7088822D29505522DE5"
+        "OwnerKey" = "8:_5962B4CC638936E6CBBCE91D0BDEE180"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -63,7 +63,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:..\\archive2music_installer\\Debug\\archive2music_installer.msi"
+        "OutputFilename" = "8:Debug\\archive2music_installer.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -80,6 +80,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -87,7 +95,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:..\\archive2music_installer\\Release\\archive2music_installer.msi"
+        "OutputFilename" = "8:Release\\archive2music_installer.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -104,6 +112,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -134,6 +150,37 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5962B4CC638936E6CBBCE91D0BDEE180"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Ookii.Dialogs.Wpf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=66aa232afad40158, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_5962B4CC638936E6CBBCE91D0BDEE180"
+                    {
+                    "Name" = "8:Ookii.Dialogs.Wpf.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Ookii.Dialogs.Wpf.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2FE7265A1CDA46B995DE45F571660909"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9CB9A1E59F805507D42798686AD45F83"
             {
             "AssemblyRegister" = "3:1"
@@ -183,37 +230,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E8DC56E4DC65E7088822D29505522DE5"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Ookii.Dialogs.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0c15020868fd6249, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_E8DC56E4DC65E7088822D29505522DE5"
-                    {
-                    "Name" = "8:Ookii.Dialogs.Wpf.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Ookii.Dialogs.Wpf.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2FE7265A1CDA46B995DE45F571660909"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -273,7 +289,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:archive2music"
         "ProductCode" = "8:{D3ECDFEE-FE2C-49CA-BDF7-C14520B3B066}"
-        "PackageCode" = "8:{78A7F69D-14C8-4F18-95F7-9D74E86A1A97}"
+        "PackageCode" = "8:{0F545A1D-E58A-40FD-AF36-67CE00BB388B}"
         "UpgradeCode" = "8:{15E33479-7476-43ED-B262-887C44F673A5}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -283,13 +299,13 @@
         "ProductVersion" = "8:0.8.0"
         "Manufacturer" = "8:jakubkastner"
         "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:https://github.com/jakubkastner"
+        "ARPHELPLINK" = "8:https://github.com/jakubkastner/archive2music"
         "Title" = "8:archive2music"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Jakub Kastner"
-        "Keywords" = "8:"
+        "Keywords" = "8:archive2music"
         "ARPCOMMENTS" = "8:"
-        "ARPURLINFOABOUT" = "8:"
+        "ARPURLINFOABOUT" = "8:https://jakubkastner.github.io/"
         "ARPPRODUCTICON" = "8:_C89394CE97C04D1AB09D8135C61A754A"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"

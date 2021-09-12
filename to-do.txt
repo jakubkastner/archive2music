@@ -1,0 +1,93 @@
+OPRAVY CHYB
+
+!. samovolné změny názvu cílových složek k přesunu -> hudební_složka/interpret/rok-interpret -> nevím kdy se toto děje
+
+0. chyba při spuštění = "adresář není prázdný"
+1. přidat typy souborů archivů
+2. při již přidaných archivech a následné změně složek v nastavení (opus, mp3) nedojde vždy ke změně složek u archivů a vůbec se nemění jejich stav
+3. při přidání již existujícího archivu skrz "přidání archivu" se uloží jen změna cesty k archivu, nikoliv další uživatelem vyplněné položky (např. interpret, album)
+4. při rozbalování archivu, pokud je v rozbaleném archivu, další archiv, nabídnu uživateli jeho rozbalení
+5. (pokračování k 4.) a přidat také následnou kontrolu existence rozbalených souborů
+6. při převodu na opus / mp3 přidat po převodu následnou kontolu, zdali se soubory opus / mp3 existují
+7. při jakékoliv operaci (převod na opus / mp3, rozbalování archivu, přesun do složek) zakázat různé úpravy (např. měnit cestu k souborům v nastavení, nebo upravovat převáděné archivy)
+8. když přidávám složku, archiv, soubor, tak se přidá duplikátní složka / soubor, pokud má na konci "/" (např. "C:\jakub" a "C:\jakub\") a ostranit "\\" pozor -> cesta je stejná ("C:\\\\\\jakub" a "C:\jakub")
+9. upravit zobrazování statusu (někdy se zobrazuje až moc věcí) - nezobrazovat pro jednotlivé položky úspěch (pouze neúspěch) a poté až na konci počet úspěšných / neúspěšných
+10. při ukládání úpravy / přidávání nového archivu - odstřihnout mezery na začátku a konci u (Trim) interpreta, album, žánr, ...
+11. mačkám-li delete a mažu položku z comboboxu -> smaže se i část textu z aktulně zobrazené složky / souboru
+12. při úpravě se vždy nastavuje jako výchozí složka Hip-Hop a CZ & SK
+13. není až tak špatně -> (při úpravě, pokud existuje složka (opus / mp3) nemůžu nic dělat, pouze změnit tu složku)
+14. spuštění programu více než 1x -> spoustu chyb
+
+
+NOVÉ FUNKCE
+
+a) zobrazení archivů -> přidání tlačítka na otevření rozbalené složky v mp3 tagu
+b) zobrazení archivů -> přidání tlačítka na převod na opus a mp3 najednou -> změnit zobrazování stavu (přidat "převádím na opus / mp3")
+c) zobrazení archivů -> spustit vše = spustí vše pro vybrané archivy
+d) přidání složky -> při načtení smazat nepřidané archivy z minula
+e) přidání / úprava archivu -> přepsat stávající soubory v cílové složce
+f) nastavení -> povolit uživatelovu úpravu parametrů
+g) automatické tagování přímo v programu
+
+SEZNAM STAVŮ
+
+-2 = vyplněny informace k albu u složky
+-1 = přidána složka složka již přidaná (není potřeba rozbalit)
+0 = přidán archiv
+1 = vyplněna informace k albu u archivu (interpret, album, rok)
+2 = archiv rozbalen
+3 = převedeno na opus
+4 = převedeno na mp3
+5 = 1 + 2 + 3 + 4 (převedeno na opus i mp3)
+6 = přesunuto do knihovny (opus i mp3) = konec
+7 = opus přesunuto do knihovny
+8 = mp3 přesunuto do knihovny
+9 = 3 + 8 (převedeno na opus a mp3 přesunuto do knihovny)
+10 = 4 + 7 (převedeno na mp3 a opus přesunuto do knihovny)
+
+
+*****staré*****
+0 = přidán archiv
+1 = vyplněna složka (interpret, album, rok)
+2 = archiv rozbalen
+3 = převedeno na opus
+4 = převedeno na mp3
+5 = 1 + 2 + 3 + 4
+6 = přesunuto do knihovny
+
+musí být splněno
+x -> 0
+0 -> 1
+1 -> 2
+2 -> 3
+2 -> 4
+3 + 4 -> 5
+5 -> 6
+
+mohu dělat ze stavu
+0 -> 1
+1 -> 2
+2 -> 3, 4, 5
+3 -> 4, 5
+4 -> 3, 5
+5 -> 6
+6 -> x
+
+*****staré*****
+1 = vyplněna složka (interpret, album, rok)
+-> připraveno k rozbalení
+
+2 = úspěšně rozbaleno
+-> připraveno k převodu na mp3 nebo opus
+
+3 = převedeno na mp3
+-> mohu otevřít mp3 v mp3tagu
+
+4 = převedeno na opus
+-> mohu otevřít opus v mp3tagu
+
+5 = převedeno na opus i mp3
+-> mohu otevřít mp3 a opus (vše) v mp3tagu
+-> připraveno na přesun do knihoven
+
+6 = přesunuto do knihovny

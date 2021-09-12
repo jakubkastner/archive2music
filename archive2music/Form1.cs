@@ -1555,7 +1555,12 @@ namespace alba
             }
             else
             {
-                slozka = Path.GetFileNameWithoutExtension(textBoxPridaniUpravaArchivu_Archiv.Text);
+                string cesta = textBoxPridaniUpravaArchivu_Archiv.Text;
+                if (cesta.Last() == '\\')
+                {
+                    cesta = cesta.Substring(0, cesta.Length - 1);
+                }
+                slozka = Path.GetFileNameWithoutExtension(cesta);
             }
             try
             {
@@ -3850,7 +3855,6 @@ namespace alba
     9 = 3 + 8 (převedeno na opus a mp3 přesunuto do knihovny)
     10 = 4 + 7 (převedeno na mp3 a opus přesunuto do knihovny)
 
-
     musí být splněno
     -> 0
     -> 1
@@ -3866,30 +3870,5 @@ namespace alba
     2, 3 -> 4
     1 + 2 + 3 + 4 -> 5
     5 (=1+2+3+4) -> 6
-
-
-
-
-
-
-
-    *****staré*****
-    1 = vyplněna složka (interpret, album, rok)
-      -> připraveno k rozbalení
-
-    2 = úspěšně rozbaleno
-      -> připraveno k převodu na mp3 nebo opus
-
-    3 = převedeno na mp3
-      -> mohu otevřít mp3 v mp3tagu
-
-    4 = převedeno na opus
-      -> mohu otevřít opus v mp3tagu
-
-    5 = převedeno na opus i mp3
-      -> mohu otevřít mp3 a opus (vše) v mp3tagu
-      -> připraveno na přesun do knihoven
-
-    6 = přesunuto do knihovny
 
 */
