@@ -3,6 +3,9 @@
 __Please note:__
 This program is only in the Czech language!
 
+__Upozornění:__
+Program byl primárně vytvořen pro moje osobní použití. Aktuálně existují [omezení](#aktuální-omezení-programu), která budou možná v budoucích verzích odstraněna.
+
 ## O programu
 Program archive2music slouží k organizaci hudebních alb načtených buďto z archivu (zip, rar apod.) nebo přímo ze složky.
 
@@ -11,6 +14,11 @@ Program je volně ke stažení na této adrese:
 [Download here](https://github.com/jakubkastner/archive2music/raw/master/archive2music_installer/Debug/archive2music_installer.msi)
 
 ## Funkce programu
+* Rozbalení archivu (zip, rar apod.) s hudebním albem.
+* Přidání coveru alba do složky k danému albu a ke každému mp3 souboru.
+* Pomocí integrace s mp3tag je zajištěno otagování (stopa, skladba, interpret, album, rok, žánr, u mp3 souborů i cover) jednotlivých tracků z alba.
+* Převedení hudebních souborů z archivu na mp3 (nejlepší kvalita, cover u každého tracku) nebo opus (nejlepší poměr velikost souboru / výsledná kvalita).
+* Automatická organizace hudebního alba do Vaší hudební knihovny *hudební_knihovna/podsložka/interpret/rok_vydání_alba název_alba/*.
 
 ## Jak pracovat s programem
 1. Načtení složky a zobrazení archivů ve složce  
@@ -45,6 +53,9 @@ Tyto programy je možné nainstalovat a v nastavenení programu archive2music na
 * album art downloader
 * deezer albums search
 * [mp3tag](https://www.mp3tag.de/)
+
+
+## Integrace s mp3tag
 
 ## Aktuální omezení programu
 1. V nastavení je nutné nastavit 2 knihovny (mp3 a opus) - lze nastavit stejné složky a používat pak k převodu pouze jeden typ souboru (mp3/opus)
