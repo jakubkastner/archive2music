@@ -387,12 +387,16 @@ namespace alba
                 }
             }
         }
-        private void SpustitProgram(string cesta, string parametry, bool pockej)
+        private void SpustitProgram(string cesta, string parametry, bool pockej, bool kontrola = true)
         {
             // spustí program
             ZobrazStavPrubezny("spouštím " + cesta);
-            if (File.Exists(cesta) || Directory.Exists(cesta))
+            if (kontrola && !File.Exists(cesta) && !Directory.Exists(cesta))
             {
+                ZobrazStavPosledni("program se nepodařilo spustit", false);
+                ZobrazChybu("Neexistující soubor (" + cesta + ") nelze spustit!", "Spouštění programu");
+                return;
+            }
                 try
                 {
                     ProcessStartInfo info = new ProcessStartInfo(cesta, parametry);
@@ -412,13 +416,6 @@ namespace alba
                     ZobrazChybu(ex.Message, "Spouštění programu");
                     return;
                 }
-            }
-            else
-            {
-                ZobrazStavPosledni("program se nepodařilo spustit", false);
-                ZobrazChybu("Neexistující soubor (" + cesta + ") nelze spustit!", "Spouštění programu");
-                return;
-            }
             ZobrazStavPosledni("program byl úspěšně ukončen", true);
         }
 
@@ -2597,16 +2594,22 @@ namespace alba
                 string cesta = ZiskejCestu(archivKOtevreni, typ);
                 if (String.IsNullOrEmpty(cesta))
                 {
+                    ZobrazStavPosledni("Složka daného archivu neexistuje (" + cesta + ")", false);
                     continue;
                 }
-                if (Directory.Exists(cesta))
-                {
-                    SpustitProgram(cestaMp3tagu, "/fp:\"" + cesta + "\"", false);
-                }
-                else
+                if (!Directory.Exists(cesta))
                 {
                     ZobrazStavPosledni("Složka daného archivu neexistuje (" + cesta + ")", false);
+                    continue;
                 }
+                string slozkaAlbumu = Directory.GetParent(cesta).FullName;
+                if (!Directory.Exists(slozkaAlbumu))
+                {
+                    ZobrazStavPosledni("Složka daného archivu neexistuje (" + slozkaAlbumu + ")", false);
+                    continue;
+                }
+                UlozSoubor(Path.Combine(cesta, "cesta.txt"), slozkaAlbumu);
+                SpustitProgram(cestaMp3tagu, "/fp:\"" + cesta + "\"", false);
             }
         }
 
@@ -3823,6 +3826,11 @@ namespace alba
                 }
                 ZobrazStavPosledni("Archiv '" + nazev + "' nemohl být otevřen v průzkumníku, převeďte soubory do knihovny", false);
             }
+        }
+
+        private void label31_Click(object sender, EventArgs e)
+        {
+            SpustitProgram("https://github.com/jakubkastner/archive2music", "", false, false);
         }
     }
 }
