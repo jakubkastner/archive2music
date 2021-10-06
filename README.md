@@ -19,7 +19,7 @@ Program archive2music slouží k organizaci hudebních alb načtených buďto z 
 
 ## ⏬ Stažení
 Program je volně ke stažení na této adrese:  
-[Download here](https://github.com/jakubkastner/archive2music/raw/master/archive2music_installer/Debug/archive2music_installer.msi)
+* [Download here](https://github.com/jakubkastner/archive2music/raw/master/archive2music_installer/Debug/archive2music_installer.msi)
 
 ## 🔍 Funkce
 * Rozbalení archivu (zip, rar apod.) s hudebním albem.
