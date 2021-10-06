@@ -7,12 +7,12 @@ This program is only in the Czech language!
 Program byl primárně vytvořen pro moje osobní použití. Aktuálně existují [omezení](#aktuální-omezení), která budou možná v budoucích verzích odstraněna.
 
 1. [ℹ O programu](#ℹ-o-programu)
-2. [⏬ Stažení](#--stažení)
-3. [🔍 Funkce](#🔍-funkce)
-4. [❓ Jak pracovat s programem](#❓-jak-pracovat-s-programem)
-5. [⚠ Potřebné programy pro funkčnost archive2music](#⚠-potřebné-programy-pro-funkčnost-archive2music)
-6. [➕ Volitelné programy](#➕-volitelné-programy)
-7. [🛑 Aktuální omezení](#🛑-aktuální-omezení)
+2. [⏬ Stažení](#-stažení)
+3. [🔍 Funkce](#-funkce)
+4. [❓ Jak pracovat s programem](#-jak-pracovat-s-programem)
+5. [⚠ Potřebné programy pro funkčnost archive2music](#-potřebné-programy-pro-funkčnost-archive2music)
+6. [➕ Volitelné programy](#-volitelné-programy)
+7. [🛑 Aktuální omezení](#-aktuální-omezení)
 
 ## ℹ O programu
 Program archive2music slouží k organizaci hudebních alb načtených buďto z archivu (zip, rar apod.) nebo přímo ze složky.
