@@ -4,7 +4,7 @@
 This program is only in the Czech language!
 
 ### ‼ Upozornění
-Program byl primárně vytvořen pro moje osobní použití. Aktuálně existují [omezení](#aktuální-omezení), která budou možná v budoucích verzích odstraněna.
+Program byl primárně vytvořen pro moje osobní použití. Aktuálně existují [omezení](#-aktuální-omezení), která budou možná v budoucích verzích odstraněna.
 
 1. [ℹ O programu](#ℹ-o-programu)
 2. [⏬ Stažení](#-stažení)
@@ -23,7 +23,7 @@ Program je volně ke stažení na této adrese:
 
 ## 🔍 Funkce
 * Rozbalení archivu (zip, rar apod.) s hudebním albem.
-* Přidání coveru (vybráním vlastního souboru, nebo automatickým získáním pomocí [externích programů](#volitelné-programy)) alba do složky k danému albu a ke každému mp3 souboru.
+* Přidání coveru (vybráním vlastního souboru, nebo automatickým získáním pomocí [externích programů](#-volitelné-programy)) alba do složky k danému albu a ke každému mp3 souboru.
 * Pomocí [integrace s mp3tag](https://github.com/jakubkastner/archive2music/wiki/2.-Integrace-s-mp3tag) je zajištěno otagování (stopa, skladba, interpret, album, rok, žánr, u mp3 souborů i cover) jednotlivých tracků z alba.
 * Převedení hudebních souborů z archivu na mp3 (nejlepší kvalita, cover u každého tracku) nebo opus (nejlepší poměr velikost souboru / výsledná kvalita).
 * Automatická organizace hudebního alba do Vaší hudební knihovny *hudební_knihovna/podsložka/interpret/rok_vydání_alba název_alba/*.
