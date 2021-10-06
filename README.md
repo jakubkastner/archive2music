@@ -3,7 +3,7 @@
 ### 🇨🇿 Please note
 This program is only in the Czech language!
 
-###  Upozornění
+### ‼ Upozornění
 Program byl primárně vytvořen pro moje osobní použití. Aktuálně existují [omezení](#aktuální-omezení), která budou možná v budoucích verzích odstraněna.
 
 1. [ℹ O programu](#ℹ-o-programu)
