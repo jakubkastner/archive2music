@@ -39,7 +39,7 @@ Tyto programy je nutné nainstalovat a v nastavenení programu archive2music nas
 # ➕ Volitelné programy
 Tyto programy je možné nainstalovat a v nastavenení programu archive2music nastavit cestu ke spustitelnému exe souboru. Slouží k následnému usnandění práce s alby (získání coveru alba nebo otagování hudebních souborů).
 * [Album Art Downloader](https://sourceforge.net/projects/album-art/)
-* [deezer albums search](https://github.com/jakubkastner/deezer-albums-search)
+* [Deezer albums search](https://github.com/jakubkastner/deezer-albums-search)
 * [mp3tag](https://www.mp3tag.de/) (integrace popsána [ve wiki](https://github.com/jakubkastner/archive2music/wiki/2.-Integrace-s-mp3tag))
 
 # ⛔ Aktuální omezení
